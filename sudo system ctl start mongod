@@ -1,0 +1,4 @@
+● mongod.service - MongoDB Database Server
+     Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor preset: enabled)
+     Active: inactive (dead)
+       Docs: https://docs.mongodb.org/manual
