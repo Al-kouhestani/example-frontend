@@ -77,3 +77,13 @@ whatIsYourNationalInsuranceNumber.checkYourAnswersLabel = whatIsYourNationalInsu
 whatIsYourNationalInsuranceNumber.error.required = Enter whatIsYourNationalInsuranceNumber
 whatIsYourNationalInsuranceNumber.error.length = WhatIsYourNationalInsuranceNumber must be 100 characters or less
 whatIsYourNationalInsuranceNumber.change.hidden = WhatIsYourNationalInsuranceNumber
+
+whatIsYourDOB.title = WhatIsYourDOB
+whatIsYourDOB.heading = WhatIsYourDOB
+whatIsYourDOB.hint = For example, 12 11 2007
+whatIsYourDOB.checkYourAnswersLabel = WhatIsYourDOB
+whatIsYourDOB.error.required.all = Enter the whatIsYourDOB
+whatIsYourDOB.error.required.two = The whatIsYourDOB must include {0} and {1}
+whatIsYourDOB.error.required = The whatIsYourDOB must include {0}
+whatIsYourDOB.error.invalid = Enter a real WhatIsYourDOB
+whatIsYourDOB.change.hidden = WhatIsYourDOB
