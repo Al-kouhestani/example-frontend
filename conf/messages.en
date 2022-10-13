@@ -70,3 +70,10 @@ whatIsYourName.error.firstname.length = firstname must be 100 characters or less
 whatIsYourName.error.surname.length = surname must be 100 characters or less
 whatIsYourName.firstname.change.hidden = firstname
 whatIsYourName.surname.change.hidden = surname
+
+whatIsYourNationalInsuranceNumber.title = whatIsYourNationalInsuranceNumber
+whatIsYourNationalInsuranceNumber.heading = whatIsYourNationalInsuranceNumber
+whatIsYourNationalInsuranceNumber.checkYourAnswersLabel = whatIsYourNationalInsuranceNumber
+whatIsYourNationalInsuranceNumber.error.required = Enter whatIsYourNationalInsuranceNumber
+whatIsYourNationalInsuranceNumber.error.length = WhatIsYourNationalInsuranceNumber must be 100 characters or less
+whatIsYourNationalInsuranceNumber.change.hidden = WhatIsYourNationalInsuranceNumber
