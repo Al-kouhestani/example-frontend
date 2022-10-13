@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package generators
+package pages
 
-import models._
-import org.scalacheck.Arbitrary.arbitrary
-import org.scalacheck.{Arbitrary, Gen}
+import pages.behaviours.PageBehaviours
 
-trait ModelGenerators {
 
-  implicit lazy val arbitraryWhatIsYourName: Arbitrary[WhatIsYourName] =
-    Arbitrary {
-      for {
-        firstname <- arbitrary[String]
-        surname <- arbitrary[String]
-      } yield WhatIsYourName(firstname, surname)
-    }
+class WhatIsYourNationalInsuranceNumberPageSpec extends PageBehaviours {
+
+  "WhatIsYourNationalInsuranceNumberPage" - {
+
+    beRetrievable[String](WhatIsYourNationalInsuranceNumberPage)
+
+    beSettable[String](WhatIsYourNationalInsuranceNumberPage)
+
+    beRemovable[String](WhatIsYourNationalInsuranceNumberPage)
+  }
 }

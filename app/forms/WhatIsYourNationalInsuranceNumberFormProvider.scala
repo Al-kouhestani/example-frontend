@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package generators
+package forms
 
-import models._
-import org.scalacheck.Arbitrary.arbitrary
-import org.scalacheck.{Arbitrary, Gen}
+import javax.inject.Inject
 
-trait ModelGenerators {
+import forms.mappings.Mappings
+import play.api.data.Form
 
-  implicit lazy val arbitraryWhatIsYourName: Arbitrary[WhatIsYourName] =
-    Arbitrary {
-      for {
-        firstname <- arbitrary[String]
-        surname <- arbitrary[String]
-      } yield WhatIsYourName(firstname, surname)
-    }
+class WhatIsYourNationalInsuranceNumberFormProvider @Inject() extends Mappings {
+
+  def apply(): Form[String] =
+    Form(
+      "value" -> text("whatIsYourNationalInsuranceNumber.error.required")
+        .verifying(maxLength(100, "whatIsYourNationalInsuranceNumber.error.length"))
+    )
 }
