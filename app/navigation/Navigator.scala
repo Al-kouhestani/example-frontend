@@ -27,8 +27,8 @@ import models._
 class Navigator @Inject()() {
 
   private val normalRoutes: Page => UserAnswers => Call = {
-    case whatIsYourNamePage => _ => routes..
-    case _                  => _ => routes.statutorySickPayChecklistController.onPageLoad
+    case whatIsYourNamePage => _ => routes.CheckYourAnswersController.onPageLoad
+    case _ => _ => routes.IndexController.onPageLoad
   }
 
   private val checkRouteMap: Page => UserAnswers => Call = {

@@ -20,8 +20,6 @@ GET         /account/signed-out                          controllers.auth.Signed
 
 GET         /unauthorised                                controllers.UnauthorisedController.onPageLoad
 
-GET        /statutory-sickpay-checklist                  controllers.statutorySickPayChecklistController.onPageLoad()
-
 GET        /what-is-your-name                        controllers.WhatIsYourNameController.onPageLoad(mode: Mode = NormalMode)
 POST       /what-is-your-name                        controllers.WhatIsYourNameController.onSubmit(mode: Mode = NormalMode)
 GET        /change-what-is-your-name                  controllers.WhatIsYourNameController.onPageLoad(mode: Mode = CheckMode)
