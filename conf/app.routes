@@ -39,3 +39,8 @@ GET        /dYKYClockOrPayrollNumber                        controllers.DYKYCloc
 POST       /dYKYClockOrPayrollNumber                        controllers.DYKYClockOrPayrollNumberController.onSubmit(mode: Mode = NormalMode)
 GET        /changeDYKYClockOrPayrollNumber                  controllers.DYKYClockOrPayrollNumberController.onPageLoad(mode: Mode = CheckMode)
 POST       /changeDYKYClockOrPayrollNumber                  controllers.DYKYClockOrPayrollNumberController.onSubmit(mode: Mode = CheckMode)
+
+GET        /wIYClockOrPayrollNumber                        controllers.WIYClockOrPayrollNumberController.onPageLoad(mode: Mode = NormalMode)
+POST       /wIYClockOrPayrollNumber                        controllers.WIYClockOrPayrollNumberController.onSubmit(mode: Mode = NormalMode)
+GET        /changeWIYClockOrPayrollNumber                  controllers.WIYClockOrPayrollNumberController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeWIYClockOrPayrollNumber                  controllers.WIYClockOrPayrollNumberController.onSubmit(mode: Mode = CheckMode)
