@@ -34,3 +34,8 @@ GET        /whatIsYourDOB                  controllers.WhatIsYourDOBController.o
 POST       /whatIsYourDOB                  controllers.WhatIsYourDOBController.onSubmit(mode: Mode = NormalMode)
 GET        /changeWhatIsYourDOB                        controllers.WhatIsYourDOBController.onPageLoad(mode: Mode = CheckMode)
 POST       /changeWhatIsYourDOB                        controllers.WhatIsYourDOBController.onSubmit(mode: Mode = CheckMode)
+
+GET        /dYKYClockOrPayrollNumber                        controllers.DYKYClockOrPayrollNumberController.onPageLoad(mode: Mode = NormalMode)
+POST       /dYKYClockOrPayrollNumber                        controllers.DYKYClockOrPayrollNumberController.onSubmit(mode: Mode = NormalMode)
+GET        /changeDYKYClockOrPayrollNumber                  controllers.DYKYClockOrPayrollNumberController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeDYKYClockOrPayrollNumber                  controllers.DYKYClockOrPayrollNumberController.onSubmit(mode: Mode = CheckMode)
