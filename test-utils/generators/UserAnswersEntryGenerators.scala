@@ -24,6 +24,14 @@ import play.api.libs.json.{JsValue, Json}
 
 trait UserAnswersEntryGenerators extends PageGenerators with ModelGenerators {
 
+  implicit lazy val arbitraryDYKYClockOrPayrollNumberUserAnswersEntry: Arbitrary[(DYKYClockOrPayrollNumberPage.type, JsValue)] =
+    Arbitrary {
+      for {
+        page  <- arbitrary[DYKYClockOrPayrollNumberPage.type]
+        value <- arbitrary[Boolean].map(Json.toJson(_))
+      } yield (page, value)
+    }
+
   implicit lazy val arbitraryWhatIsYourDOBUserAnswersEntry: Arbitrary[(WhatIsYourDOBPage.type, JsValue)] =
     Arbitrary {
       for {

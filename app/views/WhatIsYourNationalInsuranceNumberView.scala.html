@@ -26,7 +26,7 @@
 
 @(form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
 
-@layout(pageTitle = title(form, messages("whatIsYourNationalInsuranceNumber.title"))) {
+@layout(pageTitle = title(form, messages("What Is Your National Insurance Number?"))) {
 
     @formHelper(action = routes.WhatIsYourNationalInsuranceNumberController.onSubmit(mode)) {
 
@@ -37,8 +37,9 @@
         @govukInput(
             InputViewModel(
                 field = form("value"),
-                label = LabelViewModel(messages("whatIsYourNationalInsuranceNumber.heading")).asPageHeading()
+                label = LabelViewModel(messages("What Is Your National Insurance Number?")).asPageHeading()
             )
+            .withHint(HintViewModel(messages("It's on your National Insurance card, benefit letter, payslip or P60. For example, QQ123456C.")))
             .withWidth(Full)
         )
 

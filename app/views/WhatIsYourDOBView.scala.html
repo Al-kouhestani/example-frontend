@@ -24,7 +24,7 @@
 
 @(form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
 
-@layout(pageTitle = title(form, messages("whatIsYourDOB.title"))) {
+@layout(pageTitle = title(form, messages("What Is Your Date of Birth?"))) {
 
     @formHelper(action = routes.WhatIsYourDOBController.onSubmit(mode), 'autoComplete -> "off") {
 
@@ -35,9 +35,9 @@
         @govukDateInput(
             DateViewModel(
                 field  = form("value"),
-                legend = LegendViewModel(messages("whatIsYourDOB.heading")).asPageHeading()
+                legend = LegendViewModel(messages("What Is Your Date of Birth?")).asPageHeading()
             )
-            .withHint(HintViewModel(messages("whatIsYourDOB.hint")))
+            .withHint(HintViewModel(messages("What Is Your Date of Birth?")))
         )
 
         @govukButton(
