@@ -101,3 +101,12 @@ wIYClockOrPayrollNumber.checkYourAnswersLabel = wIYClockOrPayrollNumber
 wIYClockOrPayrollNumber.error.required = Enter Your Clock Or Payroll Number?
 wIYClockOrPayrollNumber.error.length = Your Clock Or Payroll Number must be 100 characters or less
 wIYClockOrPayrollNumber.change.hidden = What Is Your Clock Or Payroll Number?
+
+enterSicknessDetails.title = Enter Sickness Details
+enterSicknessDetails.heading = Enter brief details of your sickness
+enterSicknessDetails.checkYourAnswersLabel = Enter brief details of your sickness
+enterSicknessDetails.error.required = Enter Sickness Details
+enterSicknessDetails.error.length = Your answer must be 100 characters or less
+enterSicknessDetails.change.hidden = EnterSicknessDetails
+
+

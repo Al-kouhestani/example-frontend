@@ -44,3 +44,8 @@ GET        /wIYClockOrPayrollNumber                        controllers.WIYClockO
 POST       /wIYClockOrPayrollNumber                        controllers.WIYClockOrPayrollNumberController.onSubmit(mode: Mode = NormalMode)
 GET        /changeWIYClockOrPayrollNumber                  controllers.WIYClockOrPayrollNumberController.onPageLoad(mode: Mode = CheckMode)
 POST       /changeWIYClockOrPayrollNumber                  controllers.WIYClockOrPayrollNumberController.onSubmit(mode: Mode = CheckMode)
+
+GET        /enterSicknessDetails                        controllers.EnterSicknessDetailsController.onPageLoad(mode: Mode = NormalMode)
+POST       /enterSicknessDetails                        controllers.EnterSicknessDetailsController.onSubmit(mode: Mode = NormalMode)
+GET        /changeEnterSicknessDetails                  controllers.EnterSicknessDetailsController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeEnterSicknessDetails                  controllers.EnterSicknessDetailsController.onSubmit(mode: Mode = CheckMode)
