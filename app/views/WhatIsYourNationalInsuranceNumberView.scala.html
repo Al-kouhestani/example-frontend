@@ -37,9 +37,9 @@
         @govukInput(
             InputViewModel(
                 field = form("value"),
-                label = LabelViewModel(messages("What Is Your National Insurance Number?")).asPageHeading()
+                label = LabelViewModel(messages("whatIsYourNationalInsuranceNumber.title")).asPageHeading()
             )
-            .withHint(HintViewModel(messages("It's on your National Insurance card, benefit letter, payslip or P60. For example, QQ123456C.")))
+            .withHint(HintViewModel(messages("whatIsYourNationalInsuranceNumber.ninoLabel")))
             .withWidth(Full)
         )
 
