@@ -30,12 +30,19 @@ class Navigator @Inject()() {
     case WhatIsYourNamePage => _ => routes.WhatIsYourNationalInsuranceNumberController.onPageLoad(NormalMode)
     case WhatIsYourNationalInsuranceNumberPage => _ => routes.WhatIsYourDOBController.onPageLoad(NormalMode)
     case WhatIsYourDOBPage => _ => routes.DYKYClockOrPayrollNumberController.onPageLoad(NormalMode)
-    case DYKYClockOrPayrollNumberPage => _ => routes.WIYClockOrPayrollNumberController.onPageLoad(NormalMode)
+    case DYKYClockOrPayrollNumberPage => payrollLogic
     case _ => _ => routes.IndexController.onPageLoad
   }
 
   private val checkRouteMap: Page => UserAnswers => Call = {
     case _ => _ => routes.CheckYourAnswersController.onPageLoad
+  }
+
+  private def payrollLogic(userAnswers: UserAnswers): Call={
+        userAnswers.get(DYKYClockOrPayrollNumberPage).map{
+          case true => routes.WIYClockOrPayrollNumberController.onPageLoad(NormalMode)
+          case false => routes.EnterSicknessDetailsController.onPageLoad(NormalMode)
+        }.getOrElse(routes.JourneyRecoveryController.onPageLoad())
   }
 
   def nextPage(page: Page, mode: Mode, userAnswers: UserAnswers): Call = mode match {
