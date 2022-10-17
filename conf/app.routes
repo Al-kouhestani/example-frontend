@@ -29,3 +29,8 @@ GET        /what-is-your-national-insurance-number           controllers.WhatIsY
 POST       /what-is-your-national-insurance-number           controllers.WhatIsYourNationalInsuranceNumberController.onSubmit(mode: Mode = NormalMode)
 GET        /change-what-is-your-national-insurance-number    controllers.WhatIsYourNationalInsuranceNumberController.onPageLoad(mode: Mode = CheckMode)
 POST       /change-what-is-your-national-insurance-number    controllers.WhatIsYourNationalInsuranceNumberController.onSubmit(mode: Mode = CheckMode)
+
+GET        /whatIsYourDOB                  controllers.WhatIsYourDOBController.onPageLoad(mode: Mode = NormalMode)
+POST       /whatIsYourDOB                  controllers.WhatIsYourDOBController.onSubmit(mode: Mode = NormalMode)
+GET        /changeWhatIsYourDOB                        controllers.WhatIsYourDOBController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeWhatIsYourDOB                        controllers.WhatIsYourDOBController.onSubmit(mode: Mode = CheckMode)
