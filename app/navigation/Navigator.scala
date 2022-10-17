@@ -30,6 +30,7 @@ class Navigator @Inject()() {
     case WhatIsYourNamePage => _ => routes.WhatIsYourNationalInsuranceNumberController.onPageLoad(NormalMode)
     case WhatIsYourNationalInsuranceNumberPage => _ => routes.WhatIsYourDOBController.onPageLoad(NormalMode)
     case WhatIsYourDOBPage => _ => routes.DYKYClockOrPayrollNumberController.onPageLoad(NormalMode)
+    case DYKYClockOrPayrollNumberPage => _ => routes.WIYClockOrPayrollNumberController.onPageLoad(NormalMode)
     case _ => _ => routes.IndexController.onPageLoad
   }
 
