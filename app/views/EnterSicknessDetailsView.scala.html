@@ -37,17 +37,16 @@
             @govukErrorSummary(ErrorSummaryViewModel(form))
         }
 
-
         @govukCharacterCount(uk.gov.hmrc.govukfrontend.views.html.components.CharacterCount(
-            id = "with-hint",
-            name = "with-hint",
-            maxLength = Some(250),
+            id = "value",
+            name = "value",
+            maxWords = Some(250),
             label = Label(
                 isPageHeading = true,
                 classes = "govuk-label--l",
-                content = messages("enterSicknessDetails.heading")
+                content = messages("enterSicknessDetails.checkYourAnswersLabel")
             )
-        ))
+            ))
 
         @govukButton(
             ButtonViewModel(messages("site.continue"))
