@@ -16,16 +16,23 @@
 
 package forms
 
-import javax.inject.Inject
+import java.time.{LocalDate, ZoneOffset}
 
-import forms.mappings.Mappings
-import play.api.data.Form
+import forms.behaviours.DateBehaviours
 
-class EnterSicknessDetailsFormProvider @Inject() extends Mappings {
+class WhenDidYourSicknessBeginFormProviderSpec extends DateBehaviours {
 
-  def apply(): Form[String] =
-    Form(
-      "value" -> text("enterSicknessDetails.error.required")
-        .verifying(maxLength(250, "enterSicknessDetails.error.length"))
+  val form = new WhenDidYourSicknessBeginFormProvider()()
+
+  ".value" - {
+
+    val validData = datesBetween(
+      min = LocalDate.of(2000, 1, 1),
+      max = LocalDate.now(ZoneOffset.UTC)
     )
+
+    behave like dateField(form, "value", validData)
+
+    behave like mandatoryDateField(form, "value", "whenDidYourSicknessBegin.error.required.all")
+  }
 }

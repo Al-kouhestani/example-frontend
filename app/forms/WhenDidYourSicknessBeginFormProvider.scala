@@ -16,16 +16,21 @@
 
 package forms
 
-import javax.inject.Inject
+import java.time.LocalDate
 
 import forms.mappings.Mappings
+import javax.inject.Inject
 import play.api.data.Form
 
-class EnterSicknessDetailsFormProvider @Inject() extends Mappings {
+class WhenDidYourSicknessBeginFormProvider @Inject() extends Mappings {
 
-  def apply(): Form[String] =
+  def apply(): Form[LocalDate] =
     Form(
-      "value" -> text("enterSicknessDetails.error.required")
-        .verifying(maxLength(250, "enterSicknessDetails.error.length"))
+      "value" -> localDate(
+        invalidKey     = "whenDidYourSicknessBegin.error.invalid",
+        allRequiredKey = "whenDidYourSicknessBegin.error.required.all",
+        twoRequiredKey = "whenDidYourSicknessBegin.error.required.two",
+        requiredKey    = "whenDidYourSicknessBegin.error.required"
+      )
     )
 }
