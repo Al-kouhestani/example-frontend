@@ -113,7 +113,7 @@ enterSicknessDetails.change.hidden = EnterSicknessDetails
 
 
 whenDidYourSicknessBegin.title = WhenDidYourSicknessBegin
-whenDidYourSicknessBegin.heading = When did your sickness begin
+whenDidYourSicknessBegin.heading = When did your sickness begin?
 whenDidYourSicknessBegin.hint = For example, 12 11 2007
 whenDidYourSicknessBegin.checkYourAnswersLabel = When did your sickness begin
 whenDidYourSicknessBegin.error.required.all = Enter the When did your sickness begin
