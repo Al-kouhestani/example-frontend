@@ -72,6 +72,14 @@ class NavigatorSpec extends SpecBase {
         val someUA = UserAnswers("")
         navigator.nextPage(DYKYClockOrPayrollNumberPage, NormalMode, someUA) mustBe routes.JourneyRecoveryController.onPageLoad()
       }
+      "must go from enter details of your sickness page to when did your sickness begin" in {
+        val someUA = UserAnswers("")
+        navigator.nextPage(EnterSicknessDetailsPage, NormalMode, someUA) mustBe routes.WhenDidYourSicknessBeginController.onPageLoad(NormalMode)
+      }
+      "must go from when did your sickness begin page to has your sickness ended" in {
+        val someUA = UserAnswers("")
+        navigator.nextPage(WhenDidYourSicknessBeginPage, NormalMode, someUA) mustBe routes.HasYourSicknessEndedController.onPageLoad(NormalMode)
+      }
     }
   }
 }
