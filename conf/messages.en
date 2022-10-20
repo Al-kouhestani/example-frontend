@@ -106,7 +106,18 @@ enterSicknessDetails.title = Enter Sickness Details
 enterSicknessDetails.heading = Enter brief details of your sickness
 enterSicknessDetails.checkYourAnswersLabel = Enter brief details of your sickness
 enterSicknessDetails.error.required = Enter Sickness Details
-enterSicknessDetails.error.length = Your answer must be 100 characters or less
+enterSicknessDetails.error.length = Your answer must be 250 characters or less
+enterSicknessDetails.characters.remaining = You have 250 characters remaining
 enterSicknessDetails.change.hidden = EnterSicknessDetails
 
 
+
+whenDidYourSicknessBegin.title = WhenDidYourSicknessBegin
+whenDidYourSicknessBegin.heading = When did your sickness begin
+whenDidYourSicknessBegin.hint = For example, 12 11 2007
+whenDidYourSicknessBegin.checkYourAnswersLabel = When did your sickness begin
+whenDidYourSicknessBegin.error.required.all = Enter the When did your sickness begin
+whenDidYourSicknessBegin.error.required.two = The When did your sickness begin, must include {0} and {1}
+whenDidYourSicknessBegin.error.required = The When did your sickness begin must include {0}
+whenDidYourSicknessBegin.error.invalid = Enter a real date
+whenDidYourSicknessBegin.change.hidden = WhenDidYourSicknessBegin
