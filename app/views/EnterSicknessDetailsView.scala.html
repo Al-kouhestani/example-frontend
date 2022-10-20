@@ -20,10 +20,12 @@
     layout: templates.Layout,
     formHelper: FormWithCSRF,
     govukErrorSummary: GovukErrorSummary,
-    govukTextarea : GovukTextarea,
+    govukCharacterCount : GovukCharacterCount,
     govukButton: GovukButton,
     govukInsetText : GovukInsetText
 )
+
+
 
 @(form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
 
@@ -34,21 +36,18 @@
         @if(form.errors.nonEmpty) {
             @govukErrorSummary(ErrorSummaryViewModel(form))
         }
-        @govukTextarea(Textarea(
-        id = "more-detail",
-        name = "more-detail",
-        label = Label(
-        isPageHeading = true,
-        classes = "govuk-label--l",
-        content = messages("enterSicknessDetails.heading")
+
+
+        @govukCharacterCount(uk.gov.hmrc.govukfrontend.views.html.components.CharacterCount(
+            id = "with-hint",
+            name = "with-hint",
+            maxLength = Some(250),
+            label = Label(
+                isPageHeading = true,
+                classes = "govuk-label--l",
+                content = messages("enterSicknessDetails.heading")
             )
-        )
-        )
-        @govukInsetText(InsetText(
-        content = messages("enterSicknessDetails.characters.remaining")
         ))
-
-
 
         @govukButton(
             ButtonViewModel(messages("site.continue"))
