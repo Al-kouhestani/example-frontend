@@ -34,6 +34,8 @@ class Navigator @Inject()() {
     case EnterSicknessDetailsPage => _ => routes.WhenDidYourSicknessBeginController.onPageLoad(NormalMode)
     case WIYClockOrPayrollNumberPage => _ => routes.EnterSicknessDetailsController.onPageLoad(NormalMode)
     case WhenDidYourSicknessBeginPage => _ => routes.HasYourSicknessEndedController.onPageLoad(NormalMode)
+    case HasYourSicknessEndedPage => sickdateLogic
+    case WhenDidYourSicknessEndPage => _ => routes.WhenDidYouLastWorkController.onPageLoad(NormalMode)
     case _ => _ => routes.IndexController.onPageLoad
   }
 
@@ -48,6 +50,12 @@ class Navigator @Inject()() {
         }.getOrElse(routes.JourneyRecoveryController.onPageLoad())
   }
 
+  private def sickdateLogic(userAnswers: UserAnswers): Call = {
+    userAnswers.get(HasYourSicknessEndedPage).map {
+      case true => routes.WhenDidYourSicknessEndController.onPageLoad(NormalMode)
+      case false => routes.WhenDidYouLastWorkController.onPageLoad(NormalMode)
+    }.getOrElse(routes.JourneyRecoveryController.onPageLoad())
+  }
   def nextPage(page: Page, mode: Mode, userAnswers: UserAnswers): Call = mode match {
     case NormalMode =>
       normalRoutes(page)(userAnswers)

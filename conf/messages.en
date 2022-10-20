@@ -72,7 +72,7 @@ whatIsYourName.firstname.change.hidden = firstname
 whatIsYourName.surname.change.hidden = surname
 
 whatIsYourNationalInsuranceNumber.title = What Is Your National Insurance Number?
-whatIsYourNationalInsuranceNumber.heading = What Is Your National Insurance Number?
+whatIsYourNationalInsuranceNumber.heading = What is your National Insurance number?
 whatIsYourNationalInsuranceNumber.checkYourAnswersLabel = What Is Your National Insurance Number?
 whatIsYourNationalInsuranceNumber.error.required = Enter your National Insurance Number
 whatIsYourNationalInsuranceNumber.error.length = WhatIsYourNationalInsuranceNumber must be 100 characters or less
@@ -80,7 +80,7 @@ whatIsYourNationalInsuranceNumber.change.hidden = WhatIsYourNationalInsuranceNum
 whatIsYourNationalInsuranceNumber.ninoLabel = It's on your National Insurance card, benefit letter, payslip or P60. For example, QQ123456C.
 
 whatIsYourDOB.title = What Is Your Date of Birth?
-whatIsYourDOB.heading = What Is Your Date of Birth?
+whatIsYourDOB.heading = What is your date of birth?
 whatIsYourDOB.hint = For example, 12 11 2007
 whatIsYourDOB.checkYourAnswersLabel = What Is Your Date of Birth?
 whatIsYourDOB.error.required.all = Enter Your Date of Birth
@@ -90,13 +90,13 @@ whatIsYourDOB.error.invalid = Enter a real date
 whatIsYourDOB.change.hidden = What Is Your Date of Birth?
 
 dYKYClockOrPayrollNumber.title = Do You Know Your Clock Or Payroll Number?
-dYKYClockOrPayrollNumber.heading = Do You Know Your Clock Or Payroll Number?
+dYKYClockOrPayrollNumber.heading = Do you know your clock or payroll number?
 dYKYClockOrPayrollNumber.checkYourAnswersLabel = Do You Know Your Clock Or Payroll Number?
 dYKYClockOrPayrollNumber.error.required = Select yes if you know your Clock or Payroll Number
 dYKYClockOrPayrollNumber.change.hidden = Do You Know Your Clock Or Payroll Number?
 
 wIYClockOrPayrollNumber.title = What Is Your Clock Or Payroll Number?
-wIYClockOrPayrollNumber.heading = What Is Your Clock Or Payroll Number?
+wIYClockOrPayrollNumber.heading = What is your clock or payroll number?
 wIYClockOrPayrollNumber.checkYourAnswersLabel = wIYClockOrPayrollNumber
 wIYClockOrPayrollNumber.error.required = Enter Your Clock Or Payroll Number?
 wIYClockOrPayrollNumber.error.length = Your Clock Or Payroll Number must be 100 characters or less
@@ -123,7 +123,27 @@ whenDidYourSicknessBegin.error.invalid = Enter a real date
 whenDidYourSicknessBegin.change.hidden = WhenDidYourSicknessBegin
 
 hasYourSicknessEnded.title = Has Your Sickness Ended
-hasYourSicknessEnded.heading = Has Your Sickness Ended?
+hasYourSicknessEnded.heading = Has your sickness ended?
 hasYourSicknessEnded.checkYourAnswersLabel = Has Your Sickness Ended
 hasYourSicknessEnded.error.required = Select yes if your sickness has ended
 hasYourSicknessEnded.change.hidden = HasYourSicknessEnded
+
+whenDidYouLastWork.title = When Did You Last Work Before the Sickness Began
+whenDidYouLastWork.heading = When did you last work before the sickness began?
+whenDidYouLastWork.hint = For example, 12 11 2007
+whenDidYouLastWork.checkYourAnswersLabel = When Did You Last Work Before The Sickness Began
+whenDidYouLastWork.error.required.all = Enter the date you last worked before your sickness began
+whenDidYouLastWork.error.required.two = The date must include {0} and {1}
+whenDidYouLastWork.error.required = The date must include {0}
+whenDidYouLastWork.error.invalid = Enter a real date
+whenDidYouLastWork.change.hidden = WhenDidYouLastWork
+
+whenDidYourSicknessEnd.title = When Did Your Sickness End
+whenDidYourSicknessEnd.heading = When did your sickness end?
+whenDidYourSicknessEnd.hint = For example, 12 11 2007
+whenDidYourSicknessEnd.checkYourAnswersLabel = When Did Your Sickness End
+whenDidYourSicknessEnd.error.required.all = Enter the date
+whenDidYourSicknessEnd.error.required.two = The date must include {0} and {1}
+whenDidYourSicknessEnd.error.required = The date must include {0}
+whenDidYourSicknessEnd.error.invalid = Enter a real date
+whenDidYourSicknessEnd.change.hidden = WhenDidYourSicknessEnd
