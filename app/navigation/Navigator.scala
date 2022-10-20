@@ -33,6 +33,7 @@ class Navigator @Inject()() {
     case DYKYClockOrPayrollNumberPage => payrollLogic
     case EnterSicknessDetailsPage => _ => routes.WhenDidYourSicknessBeginController.onPageLoad(NormalMode)
     case WIYClockOrPayrollNumberPage => _ => routes.EnterSicknessDetailsController.onPageLoad(NormalMode)
+    case WhenDidYourSicknessBeginPage => _ => routes.HasYourSicknessEndedController.onPageLoad(NormalMode)
     case _ => _ => routes.IndexController.onPageLoad
   }
 
