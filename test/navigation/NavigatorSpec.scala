@@ -80,23 +80,6 @@ class NavigatorSpec extends SpecBase {
         val someUA = UserAnswers("")
         navigator.nextPage(WhenDidYourSicknessBeginPage, NormalMode, someUA) mustBe routes.HasYourSicknessEndedController.onPageLoad(NormalMode)
       }
-      "must go from has your sickness ended page to when did your sickness end if yes" in {
-        val someUA = UserAnswers("")
-        navigator.nextPage(HasYourSicknessEndedPage, NormalMode, someUA) mustBe routes.WhenDidYourSicknessEndController.onPageLoad(NormalMode)
-      }
-      "must go from has your sickness ended page to when did you last work before the sickness if no" in {
-        val someUA = UserAnswers("")
-        navigator.nextPage(HasYourSicknessEndedPage, NormalMode, someUA) mustBe routes.WhenDidYouLastWorkController.onPageLoad(NormalMode)
-      }
-      "must go from when did you last work before the sickness page to was your sickness caused by an accident at work or industrial disease" in {
-        val someUA = UserAnswers("")
-        navigator.nextPage(WhenDidYouLastWorkPage, NormalMode, someUA) mustBe routes.AccidentAtWorkOrIndustrialDiseaseController.onPageLoad(NormalMode)
-      }
-      "must go from was your sickness caused by an accident at work or industrial disease page to what is your phone number page" in {
-        val someUA = UserAnswers("")
-        navigator.nextPage(AccidentAtWorkOrIndustrialDiseasePage, NormalMode, someUA) mustBe routes.WhatIsYourPhoneNumberController.onPageLoad(NormalMode)
-      }
-
     }
   }
 }

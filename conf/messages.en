@@ -147,18 +147,3 @@ whenDidYourSicknessEnd.error.required.two = The date must include {0} and {1}
 whenDidYourSicknessEnd.error.required = The date must include {0}
 whenDidYourSicknessEnd.error.invalid = Enter a real date
 whenDidYourSicknessEnd.change.hidden = WhenDidYourSicknessEnd
-
-accidentAtWorkOrIndustrialDisease.title = Was Your Sickness Caused By An Accident At Work Or An Industrial Disease
-accidentAtWorkOrIndustrialDisease.heading = Was your sickness caused by an accident at work or an industrial disease
-accidentAtWorkOrIndustrialDisease.checkYourAnswersLabel = Was Your Sickness Caused By An Accident At Work Or An Industrial Disease
-accidentAtWorkOrIndustrialDisease.error.required = Select yes if your sickness was caused by an accident at work or an industrial disease
-accidentAtWorkOrIndustrialDisease.change.hidden = AccidentAtWorkOrIndustrialDisease
-
-whatIsYourPhoneNumber.title = What Is Your Phone Number
-whatIsYourPhoneNumber.heading = What is your phone number?
-whatIsYourPhoneNumber.checkYourAnswersLabel = What Is Your Phone Number
-whatIsYourPhoneNumber.error.nonNumeric = Enter your phone number using numbers
-whatIsYourPhoneNumber.error.required = Enter your phone number
-whatIsYourPhoneNumber.error.wholeNumber = Enter your phone number using whole numbers
-whatIsYourPhoneNumber.error.outOfRange = Your Phone Number must be between {0} and {1}
-whatIsYourPhoneNumber.change.hidden = WhatIsYourPhoneNumber

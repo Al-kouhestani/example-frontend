@@ -69,13 +69,3 @@ GET        /whenDidYourSicknessEnd                  controllers.WhenDidYourSickn
 POST       /whenDidYourSicknessEnd                  controllers.WhenDidYourSicknessEndController.onSubmit(mode: Mode = NormalMode)
 GET        /changeWhenDidYourSicknessEnd                        controllers.WhenDidYourSicknessEndController.onPageLoad(mode: Mode = CheckMode)
 POST       /changeWhenDidYourSicknessEnd                        controllers.WhenDidYourSicknessEndController.onSubmit(mode: Mode = CheckMode)
-
-GET        /accidentAtWorkOrIndustrialDisease                        controllers.AccidentAtWorkOrIndustrialDiseaseController.onPageLoad(mode: Mode = NormalMode)
-POST       /accidentAtWorkOrIndustrialDisease                        controllers.AccidentAtWorkOrIndustrialDiseaseController.onSubmit(mode: Mode = NormalMode)
-GET        /changeAccidentAtWorkOrIndustrialDisease                  controllers.AccidentAtWorkOrIndustrialDiseaseController.onPageLoad(mode: Mode = CheckMode)
-POST       /changeAccidentAtWorkOrIndustrialDisease                  controllers.AccidentAtWorkOrIndustrialDiseaseController.onSubmit(mode: Mode = CheckMode)
-
-GET        /whatIsYourPhoneNumber                  controllers.WhatIsYourPhoneNumberController.onPageLoad(mode: Mode = NormalMode)
-POST       /whatIsYourPhoneNumber                  controllers.WhatIsYourPhoneNumberController.onSubmit(mode: Mode = NormalMode)
-GET        /changeWhatIsYourPhoneNumber                        controllers.WhatIsYourPhoneNumberController.onPageLoad(mode: Mode = CheckMode)
-POST       /changeWhatIsYourPhoneNumber                        controllers.WhatIsYourPhoneNumberController.onSubmit(mode: Mode = CheckMode)
