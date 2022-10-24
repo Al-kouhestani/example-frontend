@@ -97,7 +97,7 @@ dYKYClockOrPayrollNumber.change.hidden = Do You Know Your Clock Or Payroll Numbe
 
 wIYClockOrPayrollNumber.title = What Is Your Clock Or Payroll Number?
 wIYClockOrPayrollNumber.heading = What is your clock or payroll number?
-wIYClockOrPayrollNumber.checkYourAnswersLabel = wIYClockOrPayrollNumber
+wIYClockOrPayrollNumber.checkYourAnswersLabel = What is your clock or payroll number?
 wIYClockOrPayrollNumber.error.required = Enter Your Clock Or Payroll Number?
 wIYClockOrPayrollNumber.error.length = Your Clock Or Payroll Number must be 100 characters or less
 wIYClockOrPayrollNumber.change.hidden = What Is Your Clock Or Payroll Number?
@@ -112,49 +112,49 @@ enterSicknessDetails.change.hidden = EnterSicknessDetails
 
 
 
-whenDidYourSicknessBegin.title = When Did Your Sickness Begin
+whenDidYourSicknessBegin.title = When Did Your Sickness Begin?
 whenDidYourSicknessBegin.heading = When did your sickness begin?
 whenDidYourSicknessBegin.hint = For example, 12 11 2007
-whenDidYourSicknessBegin.checkYourAnswersLabel = When did your sickness begin
+whenDidYourSicknessBegin.checkYourAnswersLabel = When did your sickness begin?
 whenDidYourSicknessBegin.error.required.all = Enter when your sickness began
 whenDidYourSicknessBegin.error.required.two = The date must include {0} and {1}
 whenDidYourSicknessBegin.error.required = The date must include {0}
 whenDidYourSicknessBegin.error.invalid = Enter a real date
 whenDidYourSicknessBegin.change.hidden = WhenDidYourSicknessBegin
 
-hasYourSicknessEnded.title = Has Your Sickness Ended
+hasYourSicknessEnded.title = Has Your Sickness Ended?
 hasYourSicknessEnded.heading = Has your sickness ended?
-hasYourSicknessEnded.checkYourAnswersLabel = Has Your Sickness Ended
+hasYourSicknessEnded.checkYourAnswersLabel = Has Your Sickness Ended?
 hasYourSicknessEnded.error.required = Select yes if your sickness has ended
 hasYourSicknessEnded.change.hidden = HasYourSicknessEnded
 
-whenDidYouLastWork.title = When Did You Last Work Before the Sickness Began
+whenDidYouLastWork.title = When Did You Last Work Before the Sickness Began?
 whenDidYouLastWork.heading = When did you last work before the sickness began?
 whenDidYouLastWork.hint = For example, 12 11 2007
-whenDidYouLastWork.checkYourAnswersLabel = When Did You Last Work Before The Sickness Began
+whenDidYouLastWork.checkYourAnswersLabel = When Did You Last Work Before The Sickness Began?
 whenDidYouLastWork.error.required.all = Enter the date you last worked before your sickness began
 whenDidYouLastWork.error.required.two = The date must include {0} and {1}
 whenDidYouLastWork.error.required = The date must include {0}
 whenDidYouLastWork.error.invalid = Enter a real date
 whenDidYouLastWork.change.hidden = WhenDidYouLastWork
 
-whenDidYourSicknessEnd.title = When Did Your Sickness End
+whenDidYourSicknessEnd.title = When Did Your Sickness End?
 whenDidYourSicknessEnd.heading = When did your sickness end?
 whenDidYourSicknessEnd.hint = For example, 12 11 2007
-whenDidYourSicknessEnd.checkYourAnswersLabel = When Did Your Sickness End
+whenDidYourSicknessEnd.checkYourAnswersLabel = When Did Your Sickness End?
 whenDidYourSicknessEnd.error.required.all = Enter the date
 whenDidYourSicknessEnd.error.required.two = The date must include {0} and {1}
 whenDidYourSicknessEnd.error.required = The date must include {0}
 whenDidYourSicknessEnd.error.invalid = Enter a real date
 whenDidYourSicknessEnd.change.hidden = WhenDidYourSicknessEnd
 
-causeOfSickness.title = Was Your Sickness Caused By An Accident At Work Or An Industrial Disease
+causeOfSickness.title = Was Your Sickness Caused By An Accident At Work Or An Industrial Disease?
 causeOfSickness.heading = Was your sickness caused by an accident at work or an industrial disease?
-causeOfSickness.checkYourAnswersLabel = Was Your Sickness Caused By An Accident At Work Or An Industrial Disease
-causeOfSickness.error.required = Select yes if your sickness was caused by an accident at work or an industrial disease
+causeOfSickness.checkYourAnswersLabel = Was Your Sickness Caused By An Accident At Work Or An Industrial Disease?
+causeOfSickness.error.required = Select yes if your sickness was caused by an accident at work or an industrial disease?
 causeOfSickness.change.hidden = CauseOfSickness
 
-whatIsYourPhoneNumber.title = What Is Your Phone Number
+whatIsYourPhoneNumber.title = What Is Your Phone Number?
 whatIsYourPhoneNumber.heading = What is your phone number?
 whatIsYourPhoneNumber.checkYourAnswersLabel = What is your phone number?
 whatIsYourPhoneNumber.error.required = Enter your phone number

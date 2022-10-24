@@ -42,9 +42,7 @@ class Navigator @Inject()() {
     case _ => _ => routes.IndexController.onPageLoad
   }
 
-  private val checkRouteMap: Page => UserAnswers => Call = {
-    case _ => _ => routes.CheckYourAnswersController.onPageLoad
-  }
+
 
   private def payrollLogic(userAnswers: UserAnswers): Call={
         userAnswers.get(DYKYClockOrPayrollNumberPage).map{
@@ -59,6 +57,37 @@ class Navigator @Inject()() {
       case false => routes.WhenDidYouLastWorkController.onPageLoad(NormalMode)
     }.getOrElse(routes.JourneyRecoveryController.onPageLoad())
   }
+
+  private val checkRouteMap: Page => UserAnswers => Call = {
+    case WhatIsYourNamePage => _ => routes.WhatIsYourNationalInsuranceNumberController.onPageLoad(CheckMode)
+    case WhatIsYourNationalInsuranceNumberPage => _ => routes.WhatIsYourDOBController.onPageLoad(CheckMode)
+    case WhatIsYourDOBPage => _ => routes.DYKYClockOrPayrollNumberController.onPageLoad(CheckMode)
+    case DYKYClockOrPayrollNumberPage => payrollLogicCheckRoute
+    case EnterSicknessDetailsPage => _ => routes.WhenDidYourSicknessBeginController.onPageLoad(CheckMode)
+    case WIYClockOrPayrollNumberPage => _ => routes.EnterSicknessDetailsController.onPageLoad(CheckMode)
+    case WhenDidYourSicknessBeginPage => _ => routes.HasYourSicknessEndedController.onPageLoad(CheckMode)
+    case HasYourSicknessEndedPage => sickdateLogicCheckRoute
+    case WhenDidYourSicknessEndPage => _ => routes.WhenDidYouLastWorkController.onPageLoad(CheckMode)
+    case WhenDidYouLastWorkPage => _ => routes.CauseOfSicknessController.onPageLoad(CheckMode)
+    case CauseOfSicknessPage => _ => routes.WhatIsYourPhoneNumberController.onPageLoad(CheckMode)
+    case WhatIsYourPhoneNumberPage => _ => routes.CheckYourAnswersController.onPageLoad
+    case _ => _ => routes.IndexController.onPageLoad
+  }
+
+  private def payrollLogicCheckRoute(userAnswers: UserAnswers): Call = {
+    userAnswers.get(DYKYClockOrPayrollNumberPage).map {
+      case true => routes.WIYClockOrPayrollNumberController.onPageLoad(CheckMode)
+      case false => routes.EnterSicknessDetailsController.onPageLoad(CheckMode)
+    }.getOrElse(routes.JourneyRecoveryController.onPageLoad())
+  }
+
+  private def sickdateLogicCheckRoute(userAnswers: UserAnswers): Call = {
+    userAnswers.get(HasYourSicknessEndedPage).map {
+      case true => routes.WhenDidYourSicknessEndController.onPageLoad(CheckMode)
+      case false => routes.WhenDidYouLastWorkController.onPageLoad(CheckMode)
+    }.getOrElse(routes.JourneyRecoveryController.onPageLoad())
+  }
+
   def nextPage(page: Page, mode: Mode, userAnswers: UserAnswers): Call = mode match {
     case NormalMode =>
       normalRoutes(page)(userAnswers)
