@@ -71,7 +71,7 @@ class Navigator @Inject()() {
     case WhenDidYouLastWorkPage => _ => routes.CauseOfSicknessController.onPageLoad(CheckMode)
     case CauseOfSicknessPage => _ => routes.WhatIsYourPhoneNumberController.onPageLoad(CheckMode)
     case WhatIsYourPhoneNumberPage => _ => routes.CheckYourAnswersController.onPageLoad
-    case _ => _ => routes.IndexController.onPageLoad
+    case _ => _ => routes.CheckYourAnswersController.onPageLoad
   }
 
   private def payrollLogicCheckRoute(userAnswers: UserAnswers): Call = {
