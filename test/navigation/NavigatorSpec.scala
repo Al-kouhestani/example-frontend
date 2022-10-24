@@ -80,6 +80,37 @@ class NavigatorSpec extends SpecBase {
         val someUA = UserAnswers("")
         navigator.nextPage(WhenDidYourSicknessBeginPage, NormalMode, someUA) mustBe routes.HasYourSicknessEndedController.onPageLoad(NormalMode)
       }
+
+      "must go from has your sickness ended page to when did you last work if no" in {
+        val someUA = UserAnswers("").set(HasYourSicknessEndedPage, false).success.value
+        navigator.nextPage(HasYourSicknessEndedPage, NormalMode, someUA) mustBe routes.WhenDidYouLastWorkController.onPageLoad(NormalMode)
+      }
+
+      "must go from has your sickness ended page to when did your sickness end if yes" in {
+        val someUA = UserAnswers("").set(HasYourSicknessEndedPage, true).success.value
+        navigator.nextPage(HasYourSicknessEndedPage, NormalMode, someUA) mustBe routes.WhenDidYourSicknessEndController.onPageLoad(NormalMode)
+      }
+
+      "must go from what is has your sickness ended page to the journey recovery if there are no user answers captured" in {
+        val someUA = UserAnswers("")
+        navigator.nextPage(HasYourSicknessEndedPage, NormalMode, someUA) mustBe routes.JourneyRecoveryController.onPageLoad()
+      }
+
+      "must go from when did you last work page to cause of sickness page" in {
+        val someUA = UserAnswers("")
+        navigator.nextPage(WhenDidYouLastWorkPage, NormalMode, someUA) mustBe routes.CauseOfSicknessController.onPageLoad(NormalMode)
+      }
+
+
+      "must go from cause of sickness page to what is your phone number page" in {
+        val someUA = UserAnswers("")
+        navigator.nextPage(CauseOfSicknessPage, NormalMode, someUA) mustBe routes.WhatIsYourPhoneNumberController.onPageLoad(NormalMode)
+      }
+
+      "must go from what's your phone number to check your answers page" in {
+        val someUA = UserAnswers("")
+        navigator.nextPage(WhatIsYourPhoneNumberPage, NormalMode, someUA) mustBe routes.CheckYourAnswersController.onPageLoad
+      }
     }
   }
 }
