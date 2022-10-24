@@ -18,9 +18,11 @@ package controllers
 
 import com.google.inject.Inject
 import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
+import pages.DYKYClockOrPayrollNumberPage
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
+import viewmodels.checkAnswers.{CauseOfSicknessSummary, DYKYClockOrPayrollNumberSummary, EnterSicknessDetailsSummary, HasYourSicknessEndedSummary, WIYClockOrPayrollNumberSummary, WhatIsYourDOBSummary, WhatIsYourNameSummary, WhatIsYourNationalInsuranceNumberSummary, WhatIsYourPhoneNumberSummary, WhenDidYouLastWorkSummary, WhenDidYourSicknessBeginSummary, WhenDidYourSicknessEndSummary}
 import viewmodels.govuk.summarylist._
 import views.html.CheckYourAnswersView
 
@@ -37,7 +39,19 @@ class CheckYourAnswersController @Inject()(
     implicit request =>
 
       val list = SummaryListViewModel(
-        rows = Seq.empty
+        rows = Seq(WhatIsYourNameSummary.row(request.userAnswers),
+          WhatIsYourNationalInsuranceNumberSummary.row(request.userAnswers),
+          WhatIsYourDOBSummary.row(request.userAnswers),
+          DYKYClockOrPayrollNumberSummary.row(request.userAnswers),
+          WIYClockOrPayrollNumberSummary.row(request.userAnswers),
+          EnterSicknessDetailsSummary.row(request.userAnswers),
+          WhenDidYourSicknessBeginSummary.row(request.userAnswers),
+          HasYourSicknessEndedSummary.row(request.userAnswers),
+          WhenDidYourSicknessEndSummary.row(request.userAnswers),
+          WhenDidYouLastWorkSummary.row(request.userAnswers),
+          CauseOfSicknessSummary.row(request.userAnswers),
+          WhatIsYourPhoneNumberSummary.row(request.userAnswers)
+        ).flatten
       )
 
       Ok(view(list))
