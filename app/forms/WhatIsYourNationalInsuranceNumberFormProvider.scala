@@ -17,15 +17,21 @@
 package forms
 
 import javax.inject.Inject
-
 import forms.mappings.Mappings
 import play.api.data.Form
+import uk.gov.hmrc.domain.Nino
+
+import scala.util.Try
+
+
 
 class WhatIsYourNationalInsuranceNumberFormProvider @Inject() extends Mappings {
 
-  def apply(): Form[String] =
+  def apply(): Form[Nino] =
     Form(
       "value" -> text("whatIsYourNationalInsuranceNumber.error.required")
-        .verifying(maxLength(100, "whatIsYourNationalInsuranceNumber.error.length"))
+        .verifying("whatIsYourNationalInsuranceNumber.error.invalid",
+          nino=> Try(Nino(nino.replaceAll("\\s", "").toUpperCase)).isSuccess)
+        .transform[Nino](nino => Nino(nino.replaceAll("\\s", "").toUpperCase), nino => nino.toString)
     )
 }

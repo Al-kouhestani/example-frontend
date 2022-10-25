@@ -18,6 +18,7 @@ package controllers
 
 import base.SpecBase
 import forms.WhatIsYourNationalInsuranceNumberFormProvider
+import generators.Generators
 import models.{NormalMode, UserAnswers}
 import navigation.{FakeNavigator, Navigator}
 import org.mockito.ArgumentMatchers.any
@@ -29,16 +30,19 @@ import play.api.mvc.Call
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import repositories.SessionRepository
+import uk.gov.hmrc.domain.Nino
 import views.html.WhatIsYourNationalInsuranceNumberView
+import org.scalacheck.Arbitrary.arbitrary
 
 import scala.concurrent.Future
 
-class WhatIsYourNationalInsuranceNumberControllerSpec extends SpecBase with MockitoSugar {
+class WhatIsYourNationalInsuranceNumberControllerSpec extends SpecBase with MockitoSugar with Generators{
 
   def onwardRoute = Call("GET", "/foo")
 
   val formProvider = new WhatIsYourNationalInsuranceNumberFormProvider()
   val form = formProvider()
+  private val ninoSample = arbitrary[Nino].sample.value
 
   lazy val whatIsYourNationalInsuranceNumberRoute = routes.WhatIsYourNationalInsuranceNumberController.onPageLoad(NormalMode).url
 
@@ -62,7 +66,7 @@ class WhatIsYourNationalInsuranceNumberControllerSpec extends SpecBase with Mock
 
     "must populate the view correctly on a GET when the question has previously been answered" in {
 
-      val userAnswers = UserAnswers(userAnswersId).set(WhatIsYourNationalInsuranceNumberPage, "answer").success.value
+      val userAnswers = UserAnswers(userAnswersId).set(WhatIsYourNationalInsuranceNumberPage, ninoSample).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
@@ -74,18 +78,17 @@ class WhatIsYourNationalInsuranceNumberControllerSpec extends SpecBase with Mock
         val result = route(application, request).value
 
         status(result) mustEqual OK
-        contentAsString(result) mustEqual view(form.fill("answer"), NormalMode)(request, messages(application)).toString
+        contentAsString(result) mustEqual view(form.fill(ninoSample), NormalMode)(request, messages(application)).toString
       }
     }
 
     "must redirect to the next page when valid data is submitted" in {
 
       val mockSessionRepository = mock[SessionRepository]
-
       when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
 
       val application =
-        applicationBuilder(userAnswers = Some(emptyUserAnswers))
+        applicationBuilder(Some(emptyUserAnswers))
           .overrides(
             bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
             bind[SessionRepository].toInstance(mockSessionRepository)
@@ -95,7 +98,7 @@ class WhatIsYourNationalInsuranceNumberControllerSpec extends SpecBase with Mock
       running(application) {
         val request =
           FakeRequest(POST, whatIsYourNationalInsuranceNumberRoute)
-            .withFormUrlEncodedBody(("value", "answer"))
+            .withFormUrlEncodedBody(("value",ninoSample.value ))
 
         val result = route(application, request).value
 

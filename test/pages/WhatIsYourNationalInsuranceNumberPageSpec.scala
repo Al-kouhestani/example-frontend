@@ -16,17 +16,19 @@
 
 package pages
 
+import generators.Generators
 import pages.behaviours.PageBehaviours
+import uk.gov.hmrc.domain.Nino
 
 
-class WhatIsYourNationalInsuranceNumberPageSpec extends PageBehaviours {
+class WhatIsYourNationalInsuranceNumberPageSpec extends PageBehaviours with Generators{
 
   "WhatIsYourNationalInsuranceNumberPage" - {
 
-    beRetrievable[String](WhatIsYourNationalInsuranceNumberPage)
+    beRetrievable[Nino](WhatIsYourNationalInsuranceNumberPage)
 
-    beSettable[String](WhatIsYourNationalInsuranceNumberPage)
+    beSettable[Nino](WhatIsYourNationalInsuranceNumberPage)
 
-    beRemovable[String](WhatIsYourNationalInsuranceNumberPage)
+    beRemovable[Nino](WhatIsYourNationalInsuranceNumberPage)
   }
 }

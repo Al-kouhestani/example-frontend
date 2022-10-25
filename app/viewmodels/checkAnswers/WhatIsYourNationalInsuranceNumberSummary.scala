@@ -33,7 +33,7 @@ object WhatIsYourNationalInsuranceNumberSummary  {
 
         SummaryListRowViewModel(
           key     = "whatIsYourNationalInsuranceNumber.checkYourAnswersLabel",
-          value   = ValueViewModel(HtmlFormat.escape(answer).toString),
+          value   = ValueViewModel(HtmlFormat.escape(answer.toString).toString),
           actions = Seq(
             ActionItemViewModel("site.change", routes.WhatIsYourNationalInsuranceNumberController.onPageLoad(CheckMode).url)
               .withVisuallyHiddenText(messages("whatIsYourNationalInsuranceNumber.change.hidden"))

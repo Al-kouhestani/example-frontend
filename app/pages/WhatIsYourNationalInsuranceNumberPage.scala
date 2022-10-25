@@ -16,11 +16,15 @@
 
 package pages
 
+import models.Mode
 import play.api.libs.json.JsPath
+import play.api.mvc.Call
+import uk.gov.hmrc.domain.Nino
 
-case object WhatIsYourNationalInsuranceNumberPage extends QuestionPage[String] {
+case object WhatIsYourNationalInsuranceNumberPage extends QuestionPage[Nino] {
 
   override def path: JsPath = JsPath \ toString
 
   override def toString: String = "whatIsYourNationalInsuranceNumber"
+  override def route(mode:Mode):Call= controllers.routes.WhatIsYourNationalInsuranceNumberController.onPageLoad(mode)
 }

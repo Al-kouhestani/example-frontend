@@ -16,13 +16,16 @@
 
 package pages
 
-import java.time.LocalDate
+import models.Mode
 
+import java.time.LocalDate
 import play.api.libs.json.JsPath
+import play.api.mvc.Call
 
 case object WhenDidYourSicknessEndPage extends QuestionPage[LocalDate] {
 
   override def path: JsPath = JsPath \ toString
 
   override def toString: String = "whenDidYourSicknessEnd"
+  override def route(mode: Mode): Call = controllers.routes.WIYClockOrPayrollNumberController.onPageLoad(mode)
 }
