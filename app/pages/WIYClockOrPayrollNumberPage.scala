@@ -16,11 +16,14 @@
 
 package pages
 
+import models.Mode
 import play.api.libs.json.JsPath
+import play.api.mvc.Call
 
 case object WIYClockOrPayrollNumberPage extends QuestionPage[String] {
 
   override def path: JsPath = JsPath \ toString
 
   override def toString: String = "wIYClockOrPayrollNumber"
+  override def route(mode: Mode): Call = controllers.routes.WIYClockOrPayrollNumberController.onPageLoad(mode)
 }

@@ -75,7 +75,8 @@ whatIsYourNationalInsuranceNumber.title = What Is Your National Insurance Number
 whatIsYourNationalInsuranceNumber.heading = What is your National Insurance number?
 whatIsYourNationalInsuranceNumber.checkYourAnswersLabel = What Is Your National Insurance Number?
 whatIsYourNationalInsuranceNumber.error.required = Enter your National Insurance Number
-whatIsYourNationalInsuranceNumber.error.length = WhatIsYourNationalInsuranceNumber must be 100 characters or less
+whatIsYourNationalInsuranceNumber.error.length = Your National Insurance must be 9 characters
+whatIsYourNationalInsuranceNumber.error.invalid = Invalid National Insurance format
 whatIsYourNationalInsuranceNumber.change.hidden = WhatIsYourNationalInsuranceNumber
 whatIsYourNationalInsuranceNumber.ninoLabel = It's on your National Insurance card, benefit letter, payslip or P60. For example, QQ123456C.
 
