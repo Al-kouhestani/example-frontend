@@ -16,23 +16,45 @@
 
 package forms
 
-import java.time.{LocalDate, ZoneOffset}
-
 import forms.behaviours.DateBehaviours
+import org.scalatestplus.mockito.MockitoSugar
+import play.api.data.FormError
+import java.time.LocalDate
 
-class WhatIsYourDOBFormProviderSpec extends DateBehaviours {
+class WhatIsYourDOBFormProviderSpec extends DateBehaviours with MockitoSugar{
 
   val form = new WhatIsYourDOBFormProvider()()
 
   ".value" - {
 
+    val maximum = LocalDate.now().minusYears(16)
+    val minimum = LocalDate.now().minusYears(120)
+
     val validData = datesBetween(
-      min = LocalDate.of(2000, 1, 1),
-      max = LocalDate.now(ZoneOffset.UTC)
+      min = minimum,
+      max = maximum
     )
+
+    behave like dateFieldWithMax(form, "value", maximum, FormError("value", "whatIsYourDOB.error.max"))
+    behave like dateFieldWithMin(form, "value", minimum, FormError("value", "whatIsYourDOB.error.min"))
 
     behave like dateField(form, "value", validData)
 
     behave like mandatoryDateField(form, "value", "whatIsYourDOB.error.required.all")
+  }
+
+  "the person should not be younger than 16 years old " in {
+    //val ineligibleDate = LocalDate.now().minusYears(16)
+    //val ineligibleUser = UserAnswers("").set(WhatIsYourDOBFormProvider)
+    //val dobPage = mock [WhatIsYourDOBPage]
+
+  }
+
+  "the date should be in the right format DD MM YYYY" in {
+
+  }
+
+  "any dates outside the value range should not be accepted" in {
+
   }
 }

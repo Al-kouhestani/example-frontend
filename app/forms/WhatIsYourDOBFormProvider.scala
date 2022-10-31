@@ -16,15 +16,21 @@
 
 package forms
 
-import java.time.LocalDate
+import config.Formats.dateTimeFormat
 
+import java.time.LocalDate
 import forms.mappings.Mappings
+
 import javax.inject.Inject
 import play.api.data.Form
 
-class WhatIsYourDOBFormProvider @Inject() extends Mappings {
+class WhatIsYourDOBFormProvider @Inject()() extends Mappings {
 
-  def apply(): Form[LocalDate] =
+
+  def apply(): Form[LocalDate] = {
+    val max = LocalDate.now().minusYears(16)
+    val min = LocalDate.now().minusYears(120)
+
     Form(
       "value" -> localDate(
         invalidKey     = "whatIsYourDOB.error.invalid",
@@ -32,5 +38,12 @@ class WhatIsYourDOBFormProvider @Inject() extends Mappings {
         twoRequiredKey = "whatIsYourDOB.error.required.two",
         requiredKey    = "whatIsYourDOB.error.required"
       )
+
+        .verifying(minDate(min, "whatIsYourDOB.error.min", min.format(dateTimeFormat)))
+        .verifying(maxDate(max, "whatIsYourDOB.error.max", max.format(dateTimeFormat)))
+
     )
+
+
+  }
 }
