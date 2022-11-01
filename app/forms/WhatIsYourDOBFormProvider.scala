@@ -30,6 +30,10 @@ class WhatIsYourDOBFormProvider @Inject()() extends Mappings {
   def apply(): Form[LocalDate] = {
     val max = LocalDate.now().minusYears(16)
     val min = LocalDate.now().minusYears(120)
+    val present = LocalDate.now()
+    implicit val localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
+
+
 
     Form(
       "value" -> localDate(
@@ -39,8 +43,12 @@ class WhatIsYourDOBFormProvider @Inject()() extends Mappings {
         requiredKey    = "whatIsYourDOB.error.required"
       )
 
-        .verifying(minDate(min, "whatIsYourDOB.error.min", min.format(dateTimeFormat)))
-        .verifying(maxDate(max, "whatIsYourDOB.error.max", max.format(dateTimeFormat)))
+        .verifying(firstError( maxDate(present, "whatIsYourDOB.error.future", present.format(dateTimeFormat)),
+          maxDate(max, "whatIsYourDOB.error.min",max.format(dateTimeFormat))
+    ))
+        .verifying(minDate(min,"whatIsYourDOB.error.max", min.format(dateTimeFormat)))
+
+
 
     )
 
