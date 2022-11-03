@@ -24,8 +24,10 @@ import play.api.data.Form
 class WIYClockOrPayrollNumberFormProvider @Inject() extends Mappings {
 
   def apply(): Form[String] =
+
     Form(
       "value" -> text("wIYClockOrPayrollNumber.error.required")
-        .verifying(maxLength(100, "wIYClockOrPayrollNumber.error.length"))
+        .verifying(maxLength(10,"wIYClockOrPayrollNumber.error.length.max"))
+        .verifying(minLength(2,"wIYClockOrPayrollNumber.error.length.min"))
     )
 }

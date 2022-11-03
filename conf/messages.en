@@ -103,7 +103,8 @@ wIYClockOrPayrollNumber.title = What Is Your Clock Or Payroll Number?
 wIYClockOrPayrollNumber.heading = What is your clock or payroll number?
 wIYClockOrPayrollNumber.checkYourAnswersLabel = What is your clock or payroll number?
 wIYClockOrPayrollNumber.error.required = Enter Your Clock Or Payroll Number?
-wIYClockOrPayrollNumber.error.length = Your Clock Or Payroll Number must be 100 characters or less
+wIYClockOrPayrollNumber.error.length.max = Your Clock Or Payroll Number must be less than 10 characters
+wIYClockOrPayrollNumber.error.length.min = Your Clock Or Payroll Number must be more than 2 characters
 wIYClockOrPayrollNumber.change.hidden = What Is Your Clock Or Payroll Number?
 
 enterSicknessDetails.title = Enter Sickness Details

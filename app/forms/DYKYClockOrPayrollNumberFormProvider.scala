@@ -27,4 +27,5 @@ class DYKYClockOrPayrollNumberFormProvider @Inject() extends Mappings {
     Form(
       "value" -> boolean("dYKYClockOrPayrollNumber.error.required")
     )
+
 }
