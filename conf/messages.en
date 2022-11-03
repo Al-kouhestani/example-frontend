@@ -89,6 +89,9 @@ whatIsYourDOB.error.required.two = The whatIsYourDOB must include {0} and {1}
 whatIsYourDOB.error.required = The whatIsYourDOB must include {0}
 whatIsYourDOB.error.invalid = Enter a real date
 whatIsYourDOB.change.hidden = What Is Your Date of Birth?
+whatIsYourDOB.error.min = You have to be 16 or older to apply
+whatIsYourDOB.error.max = Maximum age limit exceeded
+whatIsYourDOB.error.future = You cannot put a date in the future
 
 dYKYClockOrPayrollNumber.title = Do You Know Your Clock Or Payroll Number?
 dYKYClockOrPayrollNumber.heading = Do you know your clock or payroll number?

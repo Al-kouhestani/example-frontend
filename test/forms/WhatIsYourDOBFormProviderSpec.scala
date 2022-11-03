@@ -15,24 +15,34 @@
  */
 
 package forms
-
-import java.time.{LocalDate, ZoneOffset}
+import config.Formats.dateTimeFormat
 
 import forms.behaviours.DateBehaviours
+import org.scalatestplus.mockito.MockitoSugar
+import play.api.data.FormError
+import java.time.LocalDate
 
-class WhatIsYourDOBFormProviderSpec extends DateBehaviours {
+class WhatIsYourDOBFormProviderSpec extends DateBehaviours with MockitoSugar{
 
   val form = new WhatIsYourDOBFormProvider()()
 
   ".value" - {
 
+    val maximum = LocalDate.now().minusYears(16)
+    val minimum = LocalDate.now().minusYears(120)
+    val present = LocalDate.now()
+
     val validData = datesBetween(
-      min = LocalDate.of(2000, 1, 1),
-      max = LocalDate.now(ZoneOffset.UTC)
+      min = minimum,
+      max = maximum
     )
+
+    behave like dateFieldWithMax(form, "value", present, FormError("value", "whatIsYourDOB.error.future", Seq(present.format(dateTimeFormat))))
+    behave like dateFieldWithMin(form, "value", minimum, FormError("value", "whatIsYourDOB.error.max", Seq(minimum.format(dateTimeFormat))))
 
     behave like dateField(form, "value", validData)
 
     behave like mandatoryDateField(form, "value", "whatIsYourDOB.error.required.all")
   }
+
 }
