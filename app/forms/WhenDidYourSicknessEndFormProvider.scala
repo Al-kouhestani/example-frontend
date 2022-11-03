@@ -16,21 +16,32 @@
 
 package forms
 
-import java.time.LocalDate
+import config.Formats.dateTimeFormat
 
+import java.time.LocalDate
 import forms.mappings.Mappings
+
 import javax.inject.Inject
 import play.api.data.Form
 
 class WhenDidYourSicknessEndFormProvider @Inject() extends Mappings {
 
-  def apply(): Form[LocalDate] =
+  def apply(): Form[LocalDate] = {
+
+    val max = LocalDate.now().minusDays(1L)
+    val min = LocalDate.now().minusWeeks(28L)
+
     Form(
       "value" -> localDate(
-        invalidKey     = "whenDidYourSicknessEnd.error.invalid",
+        invalidKey = "whenDidYourSicknessEnd.error.invalid",
         allRequiredKey = "whenDidYourSicknessEnd.error.required.all",
         twoRequiredKey = "whenDidYourSicknessEnd.error.required.two",
-        requiredKey    = "whenDidYourSicknessEnd.error.required"
+        requiredKey = "whenDidYourSicknessEnd.error.required"
       )
+
+        .verifying(minDate(min, "hasYourSicknessEnded.error.required.min", min.format(dateTimeFormat)))
+        .verifying(maxDate(max, "hasYourSicknessEnded.error.required.max", max.format(dateTimeFormat)))
     )
+  }
+
 }

@@ -16,21 +16,31 @@
 
 package forms
 
-import java.time.LocalDate
+import config.Formats.dateTimeFormat
 
+import java.time.LocalDate
 import forms.mappings.Mappings
+
 import javax.inject.Inject
 import play.api.data.Form
 
 class WhenDidYouLastWorkFormProvider @Inject() extends Mappings {
 
-  def apply(): Form[LocalDate] =
+  def apply(): Form[LocalDate] = {
+
+    val max = LocalDate.now().minusDays(1L)
+    val min = LocalDate.now().minusWeeks(28L).minusDays(1)
+
     Form(
       "value" -> localDate(
-        invalidKey     = "whenDidYouLastWork.error.invalid",
+        invalidKey = "whenDidYouLastWork.error.invalid",
         allRequiredKey = "whenDidYouLastWork.error.required.all",
         twoRequiredKey = "whenDidYouLastWork.error.required.two",
-        requiredKey    = "whenDidYouLastWork.error.required"
+        requiredKey = "whenDidYouLastWork.error.required"
       )
+
+        .verifying(minDate(min, "whenDidYouLastWork.error.required.min", min.format(dateTimeFormat)))
+        .verifying(maxDate(max, "whenDidYouLastWork.error.required.max", max.format(dateTimeFormat)))
     )
+  }
 }
