@@ -28,7 +28,7 @@ trait FieldBehaviours extends FormSpec with ScalaCheckPropertyChecks with Genera
                               fieldName: String,
                               validDataGenerator: Gen[String]): Unit = {
 
-    "bind valid data" in {
+    "bind valid data that is no more than 10 characters " in {
 
       forAll(validDataGenerator -> "validDataItem") {
         dataItem: String =>
@@ -38,6 +38,7 @@ trait FieldBehaviours extends FormSpec with ScalaCheckPropertyChecks with Genera
       }
     }
   }
+
 
   def mandatoryField(form: Form[_],
                      fieldName: String,

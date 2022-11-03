@@ -22,8 +22,11 @@ import play.api.data.FormError
 class WIYClockOrPayrollNumberFormProviderSpec extends StringFieldBehaviours {
 
   val requiredKey = "wIYClockOrPayrollNumber.error.required"
-  val lengthKey = "wIYClockOrPayrollNumber.error.length"
-  val maxLength = 100
+  val maxLengthError = "wIYClockOrPayrollNumber.error.length.max"
+  val minLengthError = "wIYClockOrPayrollNumber.error.length.min"
+  val maxLength = 10
+  val minLength = 2
+
 
   val form = new WIYClockOrPayrollNumberFormProvider()()
 
@@ -34,14 +37,20 @@ class WIYClockOrPayrollNumberFormProviderSpec extends StringFieldBehaviours {
     behave like fieldThatBindsValidData(
       form,
       fieldName,
-      stringsWithMaxLength(maxLength)
+      stringsWithMinMaxLength(minLength, maxLength)
     )
 
     behave like fieldWithMaxLength(
       form,
       fieldName,
       maxLength = maxLength,
-      lengthError = FormError(fieldName, lengthKey, Seq(maxLength))
+      lengthError = FormError(fieldName, maxLengthError, Seq(maxLength))
+    )
+    behave like fieldWithMinLength(
+      form,
+      fieldName,
+       minLength,
+      lengthError = FormError(fieldName, minLengthError, Seq(minLength))
     )
 
     behave like mandatoryField(
