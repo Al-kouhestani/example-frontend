@@ -16,23 +16,33 @@
 
 package forms
 
-import java.time.{LocalDate, ZoneOffset}
+import config.Formats.dateTimeFormat
 
+import java.time.{LocalDate, ZoneOffset}
 import forms.behaviours.DateBehaviours
+import play.api.data.FormError
 
 class WhenDidYourSicknessBeginFormProviderSpec extends DateBehaviours {
 
   val form = new WhenDidYourSicknessBeginFormProvider()()
 
+  val maxDate = LocalDate.now().minusDays(1L)
+  val minDate = LocalDate.now().minusWeeks(28L)
+
+
+
   ".value" - {
 
     val validData = datesBetween(
-      min = LocalDate.of(2000, 1, 1),
-      max = LocalDate.now(ZoneOffset.UTC)
+      min = minDate,
+      max = maxDate
     )
 
     behave like dateField(form, "value", validData)
 
     behave like mandatoryDateField(form, "value", "whenDidYourSicknessBegin.error.required.all")
+
+    behave like dateFieldWithMax(form, "value", maxDate, FormError("value", "whenDidYourSicknessBegin.error.required.max", Seq(maxDate.format(dateTimeFormat))))
+    behave like dateFieldWithMin(form, "value", minDate, FormError("value", "whenDidYourSicknessBegin.error.required.min", Seq(minDate.format(dateTimeFormat))))
   }
 }

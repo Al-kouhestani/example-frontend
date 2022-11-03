@@ -124,6 +124,8 @@ whenDidYourSicknessBegin.checkYourAnswersLabel = When did your sickness begin?
 whenDidYourSicknessBegin.error.required.all = Enter when your sickness began
 whenDidYourSicknessBegin.error.required.two = The date must include {0} and {1}
 whenDidYourSicknessBegin.error.required = The date must include {0}
+whenDidYourSicknessBegin.error.required.min = You cannot claim SSP for longer than 28 weeks
+whenDidYourSicknessBegin.error.required.max = You cannot claim SSP for a date in the future
 whenDidYourSicknessBegin.error.invalid = Enter a real date
 whenDidYourSicknessBegin.change.hidden = WhenDidYourSicknessBegin
 
@@ -131,6 +133,8 @@ hasYourSicknessEnded.title = Has Your Sickness Ended?
 hasYourSicknessEnded.heading = Has your sickness ended?
 hasYourSicknessEnded.checkYourAnswersLabel = Has Your Sickness Ended?
 hasYourSicknessEnded.error.required = Select yes if your sickness has ended
+hasYourSicknessEnded.error.required.min = You cannot claim SSP for longer than 28 weeks
+hasYourSicknessEnded.error.required.max = You cannot put a date in the future
 hasYourSicknessEnded.change.hidden = HasYourSicknessEnded
 
 whenDidYouLastWork.title = When Did You Last Work Before the Sickness Began?
@@ -140,6 +144,8 @@ whenDidYouLastWork.checkYourAnswersLabel = When Did You Last Work Before The Sic
 whenDidYouLastWork.error.required.all = Enter the date you last worked before your sickness began
 whenDidYouLastWork.error.required.two = The date must include {0} and {1}
 whenDidYouLastWork.error.required = The date must include {0}
+whenDidYouLastWork.error.required.min = You must have worked within the last 29 weeks
+whenDidYouLastWork.error.required.max = You must have stopped working in order to claim
 whenDidYouLastWork.error.invalid = Enter a real date
 whenDidYouLastWork.change.hidden = WhenDidYouLastWork
 
