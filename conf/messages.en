@@ -135,7 +135,9 @@ hasYourSicknessEnded.checkYourAnswersLabel = Has Your Sickness Ended?
 hasYourSicknessEnded.error.required = Select yes if your sickness has ended
 hasYourSicknessEnded.error.required.min = You cannot claim SSP for longer than 28 weeks
 hasYourSicknessEnded.error.required.max = You cannot put a date in the future
+hasYourSicknessEnded.error.required.start = You cannot put a date before your sickness began
 hasYourSicknessEnded.change.hidden = HasYourSicknessEnded
+
 
 whenDidYouLastWork.title = When Did You Last Work Before the Sickness Began?
 whenDidYouLastWork.heading = When did you last work before the sickness began?

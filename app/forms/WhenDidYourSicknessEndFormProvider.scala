@@ -26,7 +26,7 @@ import play.api.data.Form
 
 class WhenDidYourSicknessEndFormProvider @Inject() extends Mappings {
 
-  def apply(): Form[LocalDate] = {
+  def apply(startDate: LocalDate): Form[LocalDate] = {
 
     val max = LocalDate.now().minusDays(1L)
     val min = LocalDate.now().minusWeeks(28L)
@@ -39,9 +39,11 @@ class WhenDidYourSicknessEndFormProvider @Inject() extends Mappings {
         requiredKey = "whenDidYourSicknessEnd.error.required"
       )
 
-        .verifying(minDate(min, "hasYourSicknessEnded.error.required.min", min.format(dateTimeFormat)))
+        .verifying(firstError(minDate(min, "hasYourSicknessEnded.error.required.min", min.format(dateTimeFormat)),
+          minDate(startDate , "hasYourSicknessEnded.error.required.start", startDate.format(dateTimeFormat))))
         .verifying(maxDate(max, "hasYourSicknessEnded.error.required.max", max.format(dateTimeFormat)))
     )
+
   }
 
 }

@@ -18,10 +18,11 @@ package controllers
 
 import controllers.actions._
 import forms.WhenDidYouLastWorkFormProvider
+
 import javax.inject.Inject
 import models.Mode
 import navigation.Navigator
-import pages.WhenDidYouLastWorkPage
+import pages.{WhenDidYouLastWorkPage, WhenDidYourSicknessBeginPage}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import repositories.SessionRepository
@@ -45,6 +46,9 @@ class WhenDidYouLastWorkController @Inject()(
   def form = formProvider()
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
+        /*
+        A pLAY controller always receives a request and returns an action
+         */
     implicit request =>
 
       val preparedForm = request.userAnswers.get(WhenDidYouLastWorkPage) match {

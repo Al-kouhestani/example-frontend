@@ -29,7 +29,6 @@ class WhenDidYourSicknessBeginFormProvider @Inject() extends Mappings {
   def apply(): Form[LocalDate] = {
     val max = LocalDate.now().minusDays(1L)
     val min = LocalDate.now().minusWeeks(28L)
-
     Form(
       "value" -> localDate(
         invalidKey     = "whenDidYourSicknessBegin.error.invalid",
@@ -39,7 +38,6 @@ class WhenDidYourSicknessBeginFormProvider @Inject() extends Mappings {
       )
         .verifying(minDate(min, "whenDidYourSicknessBegin.error.required.min", min.format(dateTimeFormat)))
         .verifying(maxDate(max, "whenDidYourSicknessBegin.error.required.max", max.format(dateTimeFormat)))
-
     )
   }
 }

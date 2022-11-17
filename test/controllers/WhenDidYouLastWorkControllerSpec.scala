@@ -42,7 +42,7 @@ class WhenDidYouLastWorkControllerSpec extends SpecBase with MockitoSugar {
 
   def onwardRoute = Call("GET", "/foo")
 
-  val validAnswer = LocalDate.now(ZoneOffset.UTC)
+  val validAnswer = LocalDate.now(ZoneOffset.UTC).minusWeeks(22)
 
   lazy val whenDidYouLastWorkRoute = routes.WhenDidYouLastWorkController.onPageLoad(NormalMode).url
 

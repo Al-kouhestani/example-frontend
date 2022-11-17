@@ -17,5 +17,4 @@
 package config
 import java.time.format.DateTimeFormatter
 object Formats {
-  val dateTimeFormat: DateTimeFormatter =    DateTimeFormatter.ofPattern("d MMMM yyyy")
-  val dateTimeHintFormat: DateTimeFormatter =    DateTimeFormatter.ofPattern("d M yyyy")}
+  val dateTimeFormat: DateTimeFormatter =    DateTimeFormatter.ofPattern("d MMMM yyyy")}

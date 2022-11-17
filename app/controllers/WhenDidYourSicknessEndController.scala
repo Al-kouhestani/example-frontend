@@ -18,15 +18,17 @@ package controllers
 
 import controllers.actions._
 import forms.WhenDidYourSicknessEndFormProvider
+
 import javax.inject.Inject
-import models.Mode
+import models.{Mode}
 import navigation.Navigator
-import pages.WhenDidYourSicknessEndPage
+import pages.{WhenDidYourSicknessBeginPage, WhenDidYourSicknessEndPage}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 import views.html.WhenDidYourSicknessEndView
+import java.time.LocalDate
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -42,23 +44,24 @@ class WhenDidYourSicknessEndController @Inject()(
                                         view: WhenDidYourSicknessEndView
                                       )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  def form = formProvider()
+  def form (startDate: LocalDate) = formProvider(startDate)
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
+
     implicit request =>
-
-      val preparedForm = request.userAnswers.get(WhenDidYourSicknessEndPage) match {
-        case None => form
-        case Some(value) => form.fill(value)
+      val start= request.userAnswers.get(WhenDidYourSicknessBeginPage)
+      val end= request.userAnswers.get(WhenDidYourSicknessEndPage)
+      (start, end) match {
+        case (Some(s), None) => Ok(view(form(s), mode))
+        case (Some(s), Some(e)) => Ok(view(form(s).fill(e), mode))
+        case _ => Redirect(routes.JourneyRecoveryController.onPageLoad())
       }
-
-      Ok(view(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData).async {
     implicit request =>
-
-      form.bindFromRequest().fold(
+      val start = request.userAnswers.get(WhenDidYourSicknessBeginPage).get
+      form(start).bindFromRequest().fold(
         formWithErrors =>
           Future.successful(BadRequest(view(formWithErrors, mode))),
 

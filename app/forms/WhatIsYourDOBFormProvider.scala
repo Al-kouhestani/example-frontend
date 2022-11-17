@@ -31,7 +31,6 @@ class WhatIsYourDOBFormProvider @Inject()() extends Mappings {
     val max = LocalDate.now().minusYears(16)
     val min = LocalDate.now().minusYears(120)
     val present = LocalDate.now()
-    implicit val localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
 
 
 

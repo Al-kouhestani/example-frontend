@@ -42,7 +42,7 @@ class WhenDidYourSicknessBeginControllerSpec extends SpecBase with MockitoSugar 
 
   def onwardRoute = Call("GET", "/foo")
 
-  val validAnswer = LocalDate.now(ZoneOffset.UTC)
+  val validAnswer = LocalDate.now(ZoneOffset.UTC).minusWeeks(26)
 
   lazy val whenDidYourSicknessBeginRoute = routes.WhenDidYourSicknessBeginController.onPageLoad(NormalMode).url
 

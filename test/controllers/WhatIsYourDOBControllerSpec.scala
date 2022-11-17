@@ -42,7 +42,7 @@ class WhatIsYourDOBControllerSpec extends SpecBase with MockitoSugar {
 
   def onwardRoute = Call("GET", "/foo")
 
-  val validAnswer = LocalDate.now(ZoneOffset.UTC)
+  val validAnswer = LocalDate.now(ZoneOffset.UTC).minusYears(20L)
 
   lazy val whatIsYourDOBRoute = routes.WhatIsYourDOBController.onPageLoad(NormalMode).url
 
@@ -108,8 +108,9 @@ class WhatIsYourDOBControllerSpec extends SpecBase with MockitoSugar {
       running(application) {
         val result = route(application, postRequest).value
 
-        status(result) mustEqual SEE_OTHER
         redirectLocation(result).value mustEqual onwardRoute.url
+        status(result) mustEqual SEE_OTHER
+
       }
     }
 

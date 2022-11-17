@@ -25,9 +25,11 @@ import play.api.data.FormError
 class WhenDidYourSicknessEndFormProviderSpec extends DateBehaviours {
 
   val form = new WhenDidYourSicknessEndFormProvider()()
+//  val sicknessStartDate = LocalDate.now()
 
   val maxDate = LocalDate.now().minusDays(1L)
   val minDate = LocalDate.now().minusWeeks(28L)
+//  val diffDate= sicknessStartDate
 
   ".value" - {
 
@@ -42,5 +44,6 @@ class WhenDidYourSicknessEndFormProviderSpec extends DateBehaviours {
 
     behave like dateFieldWithMax(form, "value", maxDate, FormError("value", "hasYourSicknessEnded.error.required.max", Seq(maxDate.format(dateTimeFormat))))
     behave like dateFieldWithMin(form, "value", minDate, FormError("value", "hasYourSicknessEnded.error.required.min", Seq(minDate.format(dateTimeFormat))))
+//    behave like dateFieldWithMin(form, "value", diffDate, FormError("value", "hasYourSicknessEnded.error.required.min", Seq(diffDate.format(dateTimeFormat))))
   }
 }
