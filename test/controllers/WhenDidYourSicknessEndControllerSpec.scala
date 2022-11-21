@@ -38,7 +38,7 @@ import scala.concurrent.Future
 class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
 
   val formProvider = new WhenDidYourSicknessEndFormProvider()
-  private def form = formProvider()
+  private def form(startDate:LocalDate) = formProvider(startDate)
 
   def onwardRoute = Call("GET", "/foo")
 
@@ -47,6 +47,7 @@ class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
   lazy val whenDidYourSicknessEndRoute = routes.WhenDidYourSicknessEndController.onPageLoad(NormalMode).url
 
   override val emptyUserAnswers = UserAnswers(userAnswersId)
+  private val beginDate : LocalDate = LocalDate.now(ZoneOffset.UTC).minusWeeks(16)
 
   def getRequest(): FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(GET, whenDidYourSicknessEndRoute)
@@ -71,7 +72,7 @@ class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
         val view = application.injector.instanceOf[WhenDidYourSicknessEndView]
 
         status(result) mustEqual OK
-        contentAsString(result) mustEqual view(form, NormalMode)(getRequest, messages(application)).toString
+        contentAsString(result) mustEqual view(form(beginDate), NormalMode)(getRequest, messages(application)).toString
       }
     }
 
@@ -87,7 +88,7 @@ class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
         val result = route(application, getRequest).value
 
         status(result) mustEqual OK
-        contentAsString(result) mustEqual view(form.fill(validAnswer), NormalMode)(getRequest, messages(application)).toString
+        contentAsString(result) mustEqual view(form(beginDate).fill(validAnswer), NormalMode)(getRequest, messages(application)).toString
       }
     }
 
@@ -122,7 +123,7 @@ class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
           .withFormUrlEncodedBody(("value", "invalid value"))
 
       running(application) {
-        val boundForm = form.bind(Map("value" -> "invalid value"))
+        val boundForm = form(beginDate).bind(Map("value" -> "invalid value"))
 
         val view = application.injector.instanceOf[WhenDidYourSicknessEndView]
 

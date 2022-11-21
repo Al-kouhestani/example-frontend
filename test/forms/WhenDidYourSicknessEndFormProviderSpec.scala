@@ -24,12 +24,12 @@ import play.api.data.FormError
 
 class WhenDidYourSicknessEndFormProviderSpec extends DateBehaviours {
 
-  val form = new WhenDidYourSicknessEndFormProvider()()
-//  val sicknessStartDate = LocalDate.now()
+
+  val form = new WhenDidYourSicknessEndFormProvider()(startDate)
+  private val startDate: LocalDate = LocalDate.now()
 
   val maxDate = LocalDate.now().minusDays(1L)
   val minDate = LocalDate.now().minusWeeks(28L)
-//  val diffDate= sicknessStartDate
 
   ".value" - {
 
