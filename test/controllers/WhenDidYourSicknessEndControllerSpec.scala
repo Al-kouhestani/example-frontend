@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@
 
 package controllers
 
-import java.time.{LocalDate, ZoneOffset}
-
 import base.SpecBase
 import forms.WhenDidYourSicknessEndFormProvider
 import models.{NormalMode, UserAnswers}
@@ -25,7 +23,7 @@ import navigation.{FakeNavigator, Navigator}
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
-import pages.WhenDidYourSicknessEndPage
+import pages.{DYKYClockOrPayrollNumberPage, WhenDidYourSicknessBeginPage, WhenDidYourSicknessEndPage}
 import play.api.inject.bind
 import play.api.mvc.{AnyContentAsEmpty, AnyContentAsFormUrlEncoded, Call}
 import play.api.test.FakeRequest
@@ -33,6 +31,7 @@ import play.api.test.Helpers._
 import repositories.SessionRepository
 import views.html.WhenDidYourSicknessEndView
 
+import java.time.{LocalDate, ZoneOffset}
 import scala.concurrent.Future
 
 class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
@@ -40,14 +39,14 @@ class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
   val formProvider = new WhenDidYourSicknessEndFormProvider()
   private def form(startDate:LocalDate) = formProvider(startDate)
 
-  def onwardRoute = Call("GET", "/foo")
+  def onwardRoute: Call = Call("GET", "/foo")
 
-  val validAnswer = LocalDate.now(ZoneOffset.UTC).minusWeeks(26)
+  val validAnswer: LocalDate = LocalDate.now(ZoneOffset.UTC).minusWeeks(22L)
 
-  lazy val whenDidYourSicknessEndRoute = routes.WhenDidYourSicknessEndController.onPageLoad(NormalMode).url
+  lazy val whenDidYourSicknessEndRoute: String = routes.WhenDidYourSicknessEndController.onPageLoad(NormalMode).url
 
-  override val emptyUserAnswers = UserAnswers(userAnswersId)
-  private val beginDate : LocalDate = LocalDate.now(ZoneOffset.UTC).minusWeeks(16)
+  override val emptyUserAnswers: UserAnswers = UserAnswers(userAnswersId)
+
 
   def getRequest(): FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(GET, whenDidYourSicknessEndRoute)
@@ -63,8 +62,9 @@ class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
   "WhenDidYourSicknessEnd Controller" - {
 
     "must return OK and the correct view for a GET" in {
+      val someUA = UserAnswers("").set(WhenDidYourSicknessBeginPage, validAnswer ).success.value
 
-      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
+      val application = applicationBuilder(userAnswers = Some(someUA)).build()
 
       running(application) {
         val result = route(application, getRequest).value
@@ -72,34 +72,38 @@ class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
         val view = application.injector.instanceOf[WhenDidYourSicknessEndView]
 
         status(result) mustEqual OK
-        contentAsString(result) mustEqual view(form(beginDate), NormalMode)(getRequest, messages(application)).toString
+        contentAsString(result) mustEqual view(form(validAnswer), NormalMode)(getRequest, messages(application)).toString
       }
     }
 
     "must populate the view correctly on a GET when the question has previously been answered" in {
-
-      val userAnswers = UserAnswers(userAnswersId).set(WhenDidYourSicknessEndPage, validAnswer).success.value
+      val someUA = UserAnswers("").set(WhenDidYourSicknessBeginPage, validAnswer ).success.value
+      val userAnswers = someUA
+        .set(WhenDidYourSicknessEndPage, validAnswer).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
-
       running(application) {
         val view = application.injector.instanceOf[WhenDidYourSicknessEndView]
 
         val result = route(application, getRequest).value
 
         status(result) mustEqual OK
-        contentAsString(result) mustEqual view(form(beginDate).fill(validAnswer), NormalMode)(getRequest, messages(application)).toString
+        contentAsString(result) mustEqual view(form(validAnswer).fill(validAnswer), NormalMode)(getRequest, messages(application)).toString
       }
     }
 
     "must redirect to the next page when valid data is submitted" in {
+      val someUA = UserAnswers("").set(WhenDidYourSicknessBeginPage, validAnswer).success.value
+      val userAnswers = someUA
+        .set(WhenDidYourSicknessEndPage, validAnswer).success.value
+
 
       val mockSessionRepository = mock[SessionRepository]
 
       when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
 
       val application =
-        applicationBuilder(userAnswers = Some(emptyUserAnswers))
+        applicationBuilder(userAnswers = Some(userAnswers))
           .overrides(
             bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
             bind[SessionRepository].toInstance(mockSessionRepository)
@@ -115,15 +119,18 @@ class WhenDidYourSicknessEndControllerSpec extends SpecBase with MockitoSugar {
     }
 
     "must return a Bad Request and errors when invalid data is submitted" in {
+      val someUA = UserAnswers("").set(WhenDidYourSicknessBeginPage, LocalDate.now().minusYears(3)).success.value
+      val userAnswers = someUA
+        .set(WhenDidYourSicknessEndPage, validAnswer).success.value
 
-      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
+      val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
       val request =
         FakeRequest(POST, whenDidYourSicknessEndRoute)
           .withFormUrlEncodedBody(("value", "invalid value"))
 
       running(application) {
-        val boundForm = form(beginDate).bind(Map("value" -> "invalid value"))
+        val boundForm = form(validAnswer).bind(Map("value" -> "invalid value"))
 
         val view = application.injector.instanceOf[WhenDidYourSicknessEndView]
 

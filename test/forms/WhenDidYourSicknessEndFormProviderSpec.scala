@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,13 @@ import play.api.data.FormError
 
 class WhenDidYourSicknessEndFormProviderSpec extends DateBehaviours {
 
+  val formProvider = new WhenDidYourSicknessEndFormProvider()
+  private val startDate: LocalDate = LocalDate.now().minusWeeks(29)
+  private val otherDate: LocalDate = LocalDate.now().minusWeeks(22)
+  private def form(beginDate:LocalDate)= formProvider(beginDate)
 
-  val form = new WhenDidYourSicknessEndFormProvider()(startDate)
-  private val startDate: LocalDate = LocalDate.now()
-
-  val maxDate = LocalDate.now().minusDays(1L)
-  val minDate = LocalDate.now().minusWeeks(28L)
+  val maxDate = LocalDate.now().minusDays(1)
+  val minDate = LocalDate.now().minusWeeks(28)
 
   ".value" - {
 
@@ -38,12 +39,17 @@ class WhenDidYourSicknessEndFormProviderSpec extends DateBehaviours {
       max = maxDate
     )
 
-    behave like dateField(form, "value", validData)
+    behave like dateField(form(startDate), "value", validData)
 
-    behave like mandatoryDateField(form, "value", "whenDidYourSicknessEnd.error.required.all")
+    behave like mandatoryDateField(form(startDate), "value", "whenDidYourSicknessEnd.error.required.all")
 
-    behave like dateFieldWithMax(form, "value", maxDate, FormError("value", "hasYourSicknessEnded.error.required.max", Seq(maxDate.format(dateTimeFormat))))
-    behave like dateFieldWithMin(form, "value", minDate, FormError("value", "hasYourSicknessEnded.error.required.min", Seq(minDate.format(dateTimeFormat))))
-//    behave like dateFieldWithMin(form, "value", diffDate, FormError("value", "hasYourSicknessEnded.error.required.min", Seq(diffDate.format(dateTimeFormat))))
+    behave like dateFieldWithMax(form(startDate), "value", maxDate,
+      FormError("value", "hasYourSicknessEnded.error.required.max", Seq(maxDate.format(dateTimeFormat))))
+
+    behave like dateFieldWithMin(form(startDate), "value", minDate,
+      FormError("value", "hasYourSicknessEnded.error.required.min", Seq(minDate.format(dateTimeFormat))))
+
+    behave like dateFieldWithMin(form(startDate), "value", otherDate,
+      FormError("value", "hasYourSicknessEnded.error.required.min", Seq(otherDate.format(dateTimeFormat))))
   }
 }
