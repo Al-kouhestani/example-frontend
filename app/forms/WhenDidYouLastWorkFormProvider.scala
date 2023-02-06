@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import play.api.data.Form
 
 class WhenDidYouLastWorkFormProvider @Inject() extends Mappings {
 
-  def apply(): Form[LocalDate] = {
+  def apply(sickDate: LocalDate): Form[LocalDate] = {
 
     val max = LocalDate.now().minusDays(1L)
     val min = LocalDate.now().minusWeeks(28L).minusDays(1)
@@ -39,7 +39,8 @@ class WhenDidYouLastWorkFormProvider @Inject() extends Mappings {
         requiredKey = "whenDidYouLastWork.error.required"
       )
 
-        .verifying(minDate(min, "whenDidYouLastWork.error.required.min", min.format(dateTimeFormat)))
+        .verifying(firstError(minDate(min, "whenDidYouLastWork.error.required.min", min.format(dateTimeFormat)),
+          minDate(sickDate, "whenDidYouLastWork.error.required.start", sickDate.format(dateTimeFormat))))
         .verifying(maxDate(max, "whenDidYouLastWork.error.required.max", max.format(dateTimeFormat)))
     )
   }

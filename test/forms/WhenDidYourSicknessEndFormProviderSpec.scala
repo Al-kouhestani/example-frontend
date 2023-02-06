@@ -26,7 +26,7 @@ class WhenDidYourSicknessEndFormProviderSpec extends DateBehaviours {
 
   val formProvider = new WhenDidYourSicknessEndFormProvider()
   private val startDate: LocalDate = LocalDate.now().minusWeeks(29)
-  private val otherDate: LocalDate = LocalDate.now().minusWeeks(22)
+
   private def form(beginDate:LocalDate)= formProvider(beginDate)
 
   val maxDate = LocalDate.now().minusDays(1)
@@ -48,8 +48,5 @@ class WhenDidYourSicknessEndFormProviderSpec extends DateBehaviours {
 
     behave like dateFieldWithMin(form(startDate), "value", minDate,
       FormError("value", "hasYourSicknessEnded.error.required.min", Seq(minDate.format(dateTimeFormat))))
-
-    behave like dateFieldWithMin(form(startDate), "value", otherDate,
-      FormError("value", "hasYourSicknessEnded.error.required.min", Seq(otherDate.format(dateTimeFormat))))
   }
 }

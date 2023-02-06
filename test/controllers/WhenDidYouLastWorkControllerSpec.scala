@@ -17,7 +17,6 @@
 package controllers
 
 import java.time.{LocalDate, ZoneOffset}
-
 import base.SpecBase
 import forms.WhenDidYouLastWorkFormProvider
 import models.{NormalMode, UserAnswers}
@@ -25,7 +24,7 @@ import navigation.{FakeNavigator, Navigator}
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
-import pages.WhenDidYouLastWorkPage
+import pages.{WhenDidYouLastWorkPage, WhenDidYourSicknessBeginPage}
 import play.api.inject.bind
 import play.api.mvc.{AnyContentAsEmpty, AnyContentAsFormUrlEncoded, Call}
 import play.api.test.FakeRequest
@@ -38,7 +37,9 @@ import scala.concurrent.Future
 class WhenDidYouLastWorkControllerSpec extends SpecBase with MockitoSugar {
 
   val formProvider = new WhenDidYouLastWorkFormProvider()
-  private def form = formProvider()
+  private val sickDate: LocalDate = LocalDate.now().minusWeeks(29)
+
+  private def form(sickDate: LocalDate) = formProvider(sickDate)
 
   def onwardRoute = Call("GET", "/foo")
 
@@ -62,8 +63,9 @@ class WhenDidYouLastWorkControllerSpec extends SpecBase with MockitoSugar {
   "WhenDidYouLastWork Controller" - {
 
     "must return OK and the correct view for a GET" in {
+      val someUA = UserAnswers("").set(WhenDidYourSicknessBeginPage, validAnswer ).success.value
 
-      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
+      val application = applicationBuilder(userAnswers = Some(someUA)).build()
 
       running(application) {
         val result = route(application, getRequest).value
@@ -71,13 +73,15 @@ class WhenDidYouLastWorkControllerSpec extends SpecBase with MockitoSugar {
         val view = application.injector.instanceOf[WhenDidYouLastWorkView]
 
         status(result) mustEqual OK
-        contentAsString(result) mustEqual view(form, NormalMode)(getRequest, messages(application)).toString
+        contentAsString(result) mustEqual view(form(sickDate), NormalMode)(getRequest, messages(application)).toString
       }
     }
 
     "must populate the view correctly on a GET when the question has previously been answered" in {
+      val someUA = UserAnswers("").set(WhenDidYourSicknessBeginPage, validAnswer ).success.value
 
-      val userAnswers = UserAnswers(userAnswersId).set(WhenDidYouLastWorkPage, validAnswer).success.value
+      val userAnswers = someUA
+        .set(WhenDidYouLastWorkPage, validAnswer).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
@@ -87,18 +91,19 @@ class WhenDidYouLastWorkControllerSpec extends SpecBase with MockitoSugar {
         val result = route(application, getRequest).value
 
         status(result) mustEqual OK
-        contentAsString(result) mustEqual view(form.fill(validAnswer), NormalMode)(getRequest, messages(application)).toString
+        contentAsString(result) mustEqual view(form(sickDate).fill(validAnswer), NormalMode)(getRequest, messages(application)).toString
       }
     }
 
     "must redirect to the next page when valid data is submitted" in {
+      val someUA = UserAnswers("").set(WhenDidYourSicknessBeginPage, validAnswer ).success.value
 
       val mockSessionRepository = mock[SessionRepository]
 
       when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
 
       val application =
-        applicationBuilder(userAnswers = Some(emptyUserAnswers))
+        applicationBuilder(userAnswers = Some(someUA))
           .overrides(
             bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
             bind[SessionRepository].toInstance(mockSessionRepository)
@@ -115,14 +120,16 @@ class WhenDidYouLastWorkControllerSpec extends SpecBase with MockitoSugar {
 
     "must return a Bad Request and errors when invalid data is submitted" in {
 
-      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
+      val someUA = UserAnswers("").set(WhenDidYourSicknessBeginPage, validAnswer ).success.value
+
+      val application = applicationBuilder(userAnswers = Some(someUA)).build()
 
       val request =
         FakeRequest(POST, whenDidYouLastWorkRoute)
           .withFormUrlEncodedBody(("value", "invalid value"))
 
       running(application) {
-        val boundForm = form.bind(Map("value" -> "invalid value"))
+        val boundForm = form(sickDate).bind(Map("value" -> "invalid value"))
 
         val view = application.injector.instanceOf[WhenDidYouLastWorkView]
 

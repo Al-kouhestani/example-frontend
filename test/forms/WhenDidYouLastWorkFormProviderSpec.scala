@@ -24,7 +24,9 @@ import play.api.data.FormError
 
 class WhenDidYouLastWorkFormProviderSpec extends DateBehaviours {
 
-  val form = new WhenDidYouLastWorkFormProvider()()
+  val formProvider = new WhenDidYouLastWorkFormProvider()
+  private val sickDate: LocalDate = LocalDate.now().minusWeeks(29)
+  private def form(sickDate:LocalDate)= formProvider(sickDate)
 
   val maxDate = LocalDate.now().minusDays(1L)
   val minDate = LocalDate.now().minusWeeks(28L).minusDays(1)
@@ -36,11 +38,13 @@ class WhenDidYouLastWorkFormProviderSpec extends DateBehaviours {
       max = maxDate
     )
 
-    behave like dateField(form, "value", validData)
+    behave like dateField(form(sickDate), "value", validData)
 
-    behave like mandatoryDateField(form, "value", "whenDidYouLastWork.error.required.all")
+    behave like mandatoryDateField(form(sickDate), "value", "whenDidYouLastWork.error.required.all")
 
-    behave like dateFieldWithMax(form, "value", maxDate, FormError("value", "whenDidYouLastWork.error.required.max", Seq(maxDate.format(dateTimeFormat))))
-    behave like dateFieldWithMin(form, "value", minDate, FormError("value", "whenDidYouLastWork.error.required.min", Seq(minDate.format(dateTimeFormat))))
+    behave like dateFieldWithMax(form(sickDate), "value", maxDate,
+      FormError("value", "whenDidYouLastWork.error.required.max", Seq(maxDate.format(dateTimeFormat))))
+    behave like dateFieldWithMin(form(sickDate), "value", minDate,
+      FormError("value", "whenDidYouLastWork.error.required.min", Seq(minDate.format(dateTimeFormat))))
   }
 }

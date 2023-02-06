@@ -148,6 +148,7 @@ whenDidYouLastWork.error.required.two = The date must include {0} and {1}
 whenDidYouLastWork.error.required = The date must include {0}
 whenDidYouLastWork.error.required.min = You must have worked within the last 29 weeks
 whenDidYouLastWork.error.required.max = You must have stopped working in order to claim
+whenDidYouLastWork.error.required.start = The last day you worked cannot be after you sick date
 whenDidYouLastWork.error.invalid = Enter a real date
 whenDidYouLastWork.change.hidden = WhenDidYouLastWork
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 import views.html.WhenDidYouLastWorkView
 
+import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
 
 class WhenDidYouLastWorkController @Inject()(
@@ -43,26 +44,23 @@ class WhenDidYouLastWorkController @Inject()(
                                         view: WhenDidYouLastWorkView
                                       )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  def form = formProvider()
+  def form(sickDate: LocalDate) = formProvider(sickDate)
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
-        /*
-        A pLAY controller always receives a request and returns an action
-         */
-    implicit request =>
-
-      val preparedForm = request.userAnswers.get(WhenDidYouLastWorkPage) match {
-        case None => form
-        case Some(value) => form.fill(value)
-      }
-
-      Ok(view(preparedForm, mode))
+      implicit request =>
+        val sickDate = request.userAnswers.get(WhenDidYourSicknessBeginPage)
+        val lastWork = request.userAnswers.get(WhenDidYouLastWorkPage)
+        (sickDate, lastWork) match {
+          case (Some(s), None) => Ok(view(form(s), mode))
+          case (Some(s), Some(e)) => Ok(view(form(s).fill(e), mode))
+          case _ => Redirect(routes.JourneyRecoveryController.onPageLoad())
+        }
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData).async {
     implicit request =>
-
-      form.bindFromRequest().fold(
+      val sickDate= request.userAnswers.get(WhenDidYourSicknessBeginPage).get
+      form(sickDate).bindFromRequest().fold(
         formWithErrors =>
           Future.successful(BadRequest(view(formWithErrors, mode))),
 
