@@ -42,14 +42,14 @@ class WhatIsYourPhoneNumberController @Inject()(
                                         view: WhatIsYourPhoneNumberView
                                     )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  val form = formProvider()
+  def form (phoneNumber: String) = formProvider(phoneNumber)
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
     implicit request =>
 
       val preparedForm = request.userAnswers.get(WhatIsYourPhoneNumberPage) match {
-        case None => form
-        case Some(value) => form.fill(value)
+        case None => form("")
+        case Some(value) => form(value)
       }
 
       Ok(view(preparedForm, mode))
