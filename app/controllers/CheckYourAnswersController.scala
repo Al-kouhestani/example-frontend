@@ -18,7 +18,7 @@ package controllers
 
 import com.google.inject.Inject
 import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
-import pages.DYKYClockOrPayrollNumberPage
+import pages.{DYKYClockOrPayrollNumberPage, WhatIsYourNamePage}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
@@ -37,6 +37,7 @@ class CheckYourAnswersController @Inject()(
 
   def onPageLoad(): Action[AnyContent] = (identify andThen getData andThen requireData) {
     implicit request =>
+      val answer = request.userAnswers.get(WhatIsYourNamePage)
 
       val list = SummaryListViewModel(
         rows = Seq(WhatIsYourNameSummary.row(request.userAnswers),
